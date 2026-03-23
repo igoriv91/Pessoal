@@ -1,0 +1,71 @@
+---
+interface TechItem {
+	name: string;
+	category: string;
+	icon: string;
+}
+
+const stack: TechItem[] = [
+	{ name: "React.js", category: "Frontend", icon: "⚛️" },
+	{ name: "React Native", category: "Mobile", icon: "📱" },
+	{ name: "TypeScript", category: "Linguagem", icon: "🔷" },
+	{ name: "Node.js", category: "Backend", icon: "🟢" },
+	{ name: "SQL Server", category: "Banco de Dados", icon: "🗄️" },
+	{ name: "Oracle DB", category: "Banco de Dados", icon: "🔴" },
+];
+
+const extras = [
+	"REST APIs",
+	"Webhooks",
+	"Push Notification",
+	"Git",
+	"Android / iOS",
+	"Play Store / App Store",
+	"CRM",
+	"Integrações Bancárias",
+];
+---
+
+<section id="stack" class="py-24">
+	<div class="md:ml-22 max-w-6xl mx-auto px-6">
+		<div class="mb-12">
+			<p
+				class="text-indigo-400 font-semibold text-sm uppercase tracking-widest mb-3"
+			>
+				Tecnologias
+			</p>
+			<h2 class="text-3xl md:text-4xl font-bold text-slate-100">
+				Stack principal
+			</h2>
+		</div>
+
+		<!-- Tech cards -->
+		<div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 mb-10">
+			{
+				stack.map((tech) => (
+					<div class="group bg-slate-800/60 border border-slate-700/50 hover:border-indigo-500/50 rounded-xl p-5 text-center transition-all duration-200 hover:bg-slate-800">
+						<span class="text-3xl mb-3 block" role="img" aria-hidden="true">
+							{tech.icon}
+						</span>
+						<p class="text-slate-100 font-semibold text-sm mb-1">{tech.name}</p>
+						<p class="text-slate-500 text-xs">{tech.category}</p>
+					</div>
+				))
+			}
+		</div>
+
+		<!-- Extras -->
+		<div>
+			<p class="text-slate-500 text-sm mb-4 font-medium">Também trabalho com</p>
+			<div class="flex flex-wrap gap-2">
+				{
+					extras.map((tag) => (
+						<span class="bg-slate-800/60 border border-slate-700/40 text-slate-400 text-xs font-medium px-3 py-1.5 rounded-full">
+							{tag}
+						</span>
+					))
+				}
+			</div>
+		</div>
+	</div>
+</section>

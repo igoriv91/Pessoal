@@ -1,0 +1,162 @@
+---
+const stats = [
+	{ value: "13+", label: "Anos de experiência" },
+	{ value: "10+", label: "Apps publicados" },
+	{ value: "20+", label: "Produtos criados" },
+];
+---
+
+<section id="sobre" class="py-24 bg-slate-900/50">
+	<div class="md:ml-22 max-w-6xl mx-auto px-6">
+		<div class="mb-12">
+			<p
+				class="text-indigo-400 font-semibold text-sm uppercase tracking-widest mb-3"
+			>
+				Sobre mim
+			</p>
+			<h2 class="text-3xl md:text-4xl font-bold text-slate-100">
+				Trajetória e experiência
+			</h2>
+		</div>
+
+		<div class="grid md:grid-cols-2 gap-12 items-start">
+			<!-- Texto -->
+			<div class="space-y-5 text-slate-400 leading-relaxed">
+				<p>
+					Iniciei minha carreira como estagiário e fui contratado um ano depois.
+					Fui crescendo dentro da empresa até assumir a
+					<strong class="text-slate-200"
+						>responsabilidade geral do setor de desenvolvimento</strong
+					>, cargo que ocupo hoje.
+				</p>
+				<p>
+					Ao longo de mais de uma década, trabalhei tanto na
+					<strong class="text-slate-200">criação de produtos do zero</strong> quanto
+					na manutenção e evolução de sistemas legados, o que me deu uma visão ampla
+					de todo o ciclo de vida de um software.
+				</p>
+				<p>
+					Tenho profundo conhecimento em regras de negócio voltadas para
+					<strong class="text-slate-200">CRM e fidelização</strong>, com
+					participação em implantações de cartão próprio, convênio, cartão
+					alimentação, cartão presente e gestão de recebimento de cheques
+					(custódia).
+				</p>
+				<p>
+					Desde que assumi a gerência do setor, lidero a
+					<strong class="text-slate-200"
+						>modernização completa dos produtos</strong
+					>, migrando para novas tecnologias e arquiteturas com foco em
+					escalabilidade e manutenibilidade.
+				</p>
+			</div>
+
+			<!-- Stats + destaque -->
+			<div class="space-y-6">
+				<!-- Stats -->
+				<div class="grid grid-cols-3 gap-4">
+					{
+						stats.map((stat) => (
+							<div class="bg-slate-800/60 border border-slate-700/50 rounded-xl p-5 text-center">
+								<p class="text-3xl font-extrabold text-indigo-400 mb-1">
+									{stat.value}
+								</p>
+								<p class="text-slate-400 text-xs leading-tight">{stat.label}</p>
+							</div>
+						))
+					}
+				</div>
+
+				<!-- Cards de destaque -->
+				<div class="space-y-3">
+					<div
+						class="flex items-start gap-4 bg-slate-800/40 border border-slate-700/30 rounded-xl p-4"
+					>
+						<span class="text-indigo-400 mt-0.5 shrink-0">
+							<svg
+								xmlns="http://www.w3.org/2000/svg"
+								class="w-5 h-5"
+								fill="none"
+								viewBox="0 0 24 24"
+								stroke="currentColor"
+							>
+								<path
+									stroke-linecap="round"
+									stroke-linejoin="round"
+									stroke-width="2"
+									d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+							</svg>
+						</span>
+						<div>
+							<p class="text-slate-200 font-medium text-sm">
+								Criação de produtos
+							</p>
+							<p class="text-slate-400 text-xs mt-0.5">
+								Totem de acesso, portais de varejistas, apps mobile, mecânicas
+								de game
+							</p>
+						</div>
+					</div>
+
+					<div
+						class="flex items-start gap-4 bg-slate-800/40 border border-slate-700/30 rounded-xl p-4"
+					>
+						<span class="text-indigo-400 mt-0.5 shrink-0">
+							<svg
+								xmlns="http://www.w3.org/2000/svg"
+								class="w-5 h-5"
+								fill="none"
+								viewBox="0 0 24 24"
+								stroke="currentColor"
+							>
+								<path
+									stroke-linecap="round"
+									stroke-linejoin="round"
+									stroke-width="2"
+									d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+							</svg>
+						</span>
+						<div>
+							<p class="text-slate-200 font-medium text-sm">
+								Integrações complexas
+							</p>
+							<p class="text-slate-400 text-xs mt-0.5">
+								Bancos, boleto, webhook de pagamento, SPC, Serasa, B2E, email,
+								SMS e push
+							</p>
+						</div>
+					</div>
+
+					<div
+						class="flex items-start gap-4 bg-slate-800/40 border border-slate-700/30 rounded-xl p-4"
+					>
+						<span class="text-indigo-400 mt-0.5 shrink-0">
+							<svg
+								xmlns="http://www.w3.org/2000/svg"
+								class="w-5 h-5"
+								fill="none"
+								viewBox="0 0 24 24"
+								stroke="currentColor"
+							>
+								<path
+									stroke-linecap="round"
+									stroke-linejoin="round"
+									stroke-width="2"
+									d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+							</svg>
+						</span>
+						<div>
+							<p class="text-slate-200 font-medium text-sm">
+								Gestão & liderança
+							</p>
+							<p class="text-slate-400 text-xs mt-0.5">
+								Head of Development, modernização de stack, definição de
+								arquitetura
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>

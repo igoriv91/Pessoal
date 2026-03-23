@@ -1,0 +1,111 @@
+---
+interface Project {
+	title: string;
+	description: string;
+	tags: string[];
+	icon: string;
+}
+
+const projects: Project[] = [
+	{
+		title: "Terminal de Acesso (Totem)",
+		description:
+			"Criação de sistema para totens de autoatendimento, com interface touch, controle de acesso e integração com sistemas internos.",
+		tags: ["Embedded", "UX Touch", "Integração"],
+		icon: "🖥️",
+	},
+	{
+		title: "Portais de Clientes",
+		description:
+			"Desenvolvimento de portais personalizados para grandes varejistas do Brasil, com funcionalidades de CRM, relatórios e gestão de campanhas.",
+		tags: ["React.js", "TypeScript", "CRM"],
+		icon: "🏬",
+	},
+	{
+		title: "Aplicativos Mobile",
+		description:
+			"Participação na criação de diversos aplicativos publicados nas lojas Android e iOS, incluindo submissão, aprovação e atualizações nas lojas.",
+		tags: ["React Native", "Play Store", "App Store"],
+		icon: "📱",
+	},
+	{
+		title: "Sistemas de Fidelização",
+		description:
+			"Implantação de plataformas completas de fidelidade: cartão próprio, convênio, alimentação, cartão presente e gestão de custódia de cheques.",
+		tags: ["CRM", "Fidelização", "Financeiro"],
+		icon: "🎁",
+	},
+	{
+		title: "Integrações Bancárias",
+		description:
+			"Integração com bancos via arquivo e API para registro de boletos, processamento de webhook de pagamento e conciliação financeira.",
+		tags: ["Node.js", "API", "Financeiro"],
+		icon: "🏦",
+	},
+	{
+		title: "Consulta de Crédito & Mensageria",
+		description:
+			"Integrações com SPC, Serasa e B2E para análise de crédito em tempo real. Sistema de mensageria via e-mail, SMS e push notification.",
+		tags: ["SPC", "Serasa", "SMS", "Push"],
+		icon: "📊",
+	},
+	{
+		title: "Mecânica de Games & Sorteios",
+		description:
+			"Criação de sistemas de cupons de sorteio para campanhas de brindes e descontos, com mecânica de gamificação para engajamento dos clientes.",
+		tags: ["Gamificação", "Campanhas", "CRM"],
+		icon: "🎮",
+	},
+	{
+		title: "Modernização de Stack",
+		description:
+			"Como Head of Development, liderando a migração completa dos produtos legados para novas tecnologias, arquitetura moderna e melhores práticas.",
+		tags: ["Liderança", "TypeScript", "Arquitetura"],
+		icon: "🚀",
+	},
+];
+---
+
+<section id="projetos" class="py-24 bg-slate-900/50">
+	<div class="md:ml-22 max-w-6xl mx-auto px-6">
+		<div class="mb-12">
+			<p
+				class="text-indigo-400 font-semibold text-sm uppercase tracking-widest mb-3"
+			>
+				Atuações
+			</p>
+			<h2 class="text-3xl md:text-4xl font-bold text-slate-100">
+				O que já construí
+			</h2>
+			<p class="text-slate-400 mt-3 max-w-xl">
+				Produtos e soluções desenvolvidos ao longo da carreira — do zero até a
+				produção.
+			</p>
+		</div>
+
+		<div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+			{
+				projects.map((project) => (
+					<article class="bg-slate-800/50 border border-slate-700/40 hover:border-indigo-500/30 rounded-xl p-6 transition-all duration-200 hover:bg-slate-800/70 flex flex-col">
+						<span class="text-3xl mb-4 block" role="img" aria-hidden="true">
+							{project.icon}
+						</span>
+						<h3 class="text-slate-100 font-semibold text-base mb-2">
+							{project.title}
+						</h3>
+						<p class="text-slate-400 text-sm leading-relaxed flex-1 mb-4">
+							{project.description}
+						</p>
+						<div class="flex flex-wrap gap-2">
+							{project.tags.map((tag) => (
+								<span class="bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 text-xs px-2.5 py-1 rounded-full font-medium">
+									{tag}
+								</span>
+							))}
+						</div>
+					</article>
+				))
+			}
+		</div>
+	</div>
+</section>
