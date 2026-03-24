@@ -1,13 +1,115 @@
 ---
+interface Tag {
+	type: "edu" | "work" | "achievement";
+	label: string;
+}
+
+interface Checkpoint {
+	year: string;
+	icon: string;
+	title: string;
+	subtitle: string;
+	tags: Tag[];
+	description: string;
+}
+
 const stats = [
 	{ value: "13+", label: "Anos de experiência" },
 	{ value: "10+", label: "Apps publicados" },
 	{ value: "20+", label: "Produtos criados" },
 ];
+
+const checkpoints: Checkpoint[] = [
+	{
+		year: "2010",
+		icon: "🎓",
+		title: "Início da Graduação",
+		subtitle: "Sistemas de Informação",
+		tags: [
+			{ label: "Sistemas de Informação", type: "edu" },
+			{ label: "FTC — hoje Uniftc", type: "edu" },
+		],
+		description:
+			"Ingressou no curso de Sistemas de Informação na FTC (hoje Uniftc), dando os primeiros passos no universo do desenvolvimento de software.",
+	},
+	{
+		year: "2013",
+		icon: "💼",
+		title: "Primeiro Emprego",
+		subtitle: "Estagiário · Intellisys",
+		tags: [
+			{ label: "Intellisys", type: "work" },
+			{ label: "Estagiário", type: "work" },
+		],
+		description:
+			"Ingressou na Intellisys, empresa especializada em soluções de CRM, fidelização e gestão de cartões próprios para grandes varejistas do Brasil. Primeiro contato com sistemas financeiros complexos e regras de negócio do varejo.",
+	},
+	{
+		year: "2014",
+		icon: "🎓",
+		title: "Formado & Efetivado",
+		subtitle: "Bacharel + Dev Jr",
+		tags: [
+			{ label: "Bacharel em SI — Uniftc", type: "edu" },
+			{ label: "Dev Jr · Intellisys", type: "work" },
+		],
+		description:
+			"Concluiu a graduação em Sistemas de Informação. No mesmo ano, foi efetivado como Desenvolvedor Jr — reconhecimento direto do desempenho no estágio. Passou a atuar em módulos de análise de crédito (SPC, Serasa, B2E) e nos primeiros portais de relacionamento para varejistas.",
+	},
+	{
+		year: "2016",
+		icon: "📱",
+		title: "MBA & Dev Pleno",
+		subtitle: "Mobile + Promoção",
+		tags: [
+			{ label: "MBA Mobile · IGTI", type: "edu" },
+			{ label: "Dev Pleno · Intellisys", type: "work" },
+		],
+		description:
+			"Concluiu MBA em Projeto e Desenvolvimento de Aplicativos Móveis pelo IGTI. Promovido a Desenvolvedor Pleno. Expandiu as entregas para apps Android e iOS publicados nas lojas, terminais de autoatendimento touch e sistemas de cupom e sorteio gamificado.",
+	},
+	{
+		year: "2020",
+		icon: "🚀",
+		title: "Desenvolvedor Sênior",
+		subtitle: "Intellisys",
+		tags: [
+			{ label: "Dev Sênior", type: "achievement" },
+			{ label: "Intellisys", type: "work" },
+		],
+		description:
+			"Promovido a Sênior após entregas críticas: integração bancária para emissão de boleto e webhook de pagamento, mensageria via e-mail, SMS e push notification, custódia de cheques e gestão completa de cartão presente (Gift).",
+	},
+	{
+		year: "2025",
+		icon: "🏆",
+		title: "Head of Development",
+		subtitle: "Intellisys",
+		tags: [
+			{ label: "Head of Development", type: "achievement" },
+			{ label: "Intellisys", type: "work" },
+		],
+		description:
+			"Assumiu a gerência do setor de desenvolvimento da Intellisys, liderando equipe técnica e conduzindo a modernização completa dos produtos — migrando sistemas legados para React, React Native, GoLang e TypeScript.",
+	},
+	{
+		year: "2026",
+		icon: "🤖",
+		title: "Iniciativas com IA",
+		subtitle: "Claude Code · Desenvolvimento assistido",
+		tags: [
+			{ label: "Inteligência Artificial", type: "achievement" },
+			{ label: "Claude Code", type: "work" },
+		],
+		description:
+			"Participou de formações em IA e adotou no time de desenvolvimento a iniciativa de programação assistida com Claude Code — acelerando entregas, elevando a qualidade técnica dos novos produtos e estabelecendo uma nova cultura de desenvolvimento no setor.",
+	},
+];
 ---
 
 <section id="sobre" class="py-24 bg-slate-900/50">
 	<div class="md:ml-22 max-w-6xl mx-auto px-6">
+		<!-- Header -->
 		<div class="mb-12">
 			<p
 				class="text-indigo-400 font-semibold text-sm uppercase tracking-widest mb-3"
@@ -15,148 +117,309 @@ const stats = [
 				Sobre mim
 			</p>
 			<h2 class="text-3xl md:text-4xl font-bold text-slate-100">
-				Trajetória e experiência
+				Trajetória & experiência
 			</h2>
 		</div>
 
-		<div class="grid md:grid-cols-2 gap-12 items-start">
-			<!-- Texto -->
-			<div class="space-y-5 text-slate-400 leading-relaxed">
-				<p>
-					Iniciei minha carreira como estagiário e fui contratado um ano depois.
-					Fui crescendo dentro da empresa até assumir a
-					<strong class="text-slate-200"
-						>responsabilidade geral do setor de desenvolvimento</strong
-					>, cargo que ocupo hoje.
-				</p>
-				<p>
-					Ao longo de mais de uma década, trabalhei tanto na
-					<strong class="text-slate-200">criação de produtos do zero</strong> quanto
-					na manutenção e evolução de sistemas legados, o que me deu uma visão ampla
-					de todo o ciclo de vida de um software.
-				</p>
-				<p>
-					Tenho profundo conhecimento em regras de negócio voltadas para
-					<strong class="text-slate-200">CRM e fidelização</strong>, com
-					participação em implantações de cartão próprio, convênio, cartão
-					alimentação, cartão presente e gestão de recebimento de cheques
-					(custódia).
-				</p>
-				<p>
-					Desde que assumi a gerência do setor, lidero a
-					<strong class="text-slate-200"
-						>modernização completa dos produtos</strong
-					>, migrando para novas tecnologias e arquiteturas com foco em
-					escalabilidade e manutenibilidade.
-				</p>
-			</div>
+		<!-- Stats -->
+		<div class="grid grid-cols-3 gap-4 mb-16 max-w-sm md:max-w-none">
+			{
+				stats.map((stat) => (
+					<div class="bg-slate-800/60 border border-slate-700/50 rounded-xl p-4 md:p-5 text-center">
+						<p class="text-2xl md:text-3xl font-extrabold text-indigo-400 mb-1">
+							{stat.value}
+						</p>
+						<p class="text-slate-400 text-xs leading-tight">{stat.label}</p>
+					</div>
+				))
+			}
+		</div>
 
-			<!-- Stats + destaque -->
-			<div class="space-y-6">
-				<!-- Stats -->
-				<div class="grid grid-cols-3 gap-4">
-					{
-						stats.map((stat) => (
-							<div class="bg-slate-800/60 border border-slate-700/50 rounded-xl p-5 text-center">
-								<p class="text-3xl font-extrabold text-indigo-400 mb-1">
-									{stat.value}
-								</p>
-								<p class="text-slate-400 text-xs leading-tight">{stat.label}</p>
+		<!-- Timeline -->
+		<div class="timeline">
+			<div class="timeline-line" aria-hidden="true"></div>
+
+			{
+				checkpoints.map((cp, i) => (
+					<div
+						class="timeline-row"
+						data-side={i % 2 === 0 ? "left" : "right"}
+					>
+						<!-- Badge de ano -->
+						<div class="year-badge" aria-hidden="true">
+							<div class="year-dot" />
+							<span class="year-text">{cp.year}</span>
+						</div>
+
+						<!-- Card -->
+						<article class="checkpoint-card">
+							<div class="cp-header">
+								<span class="cp-icon" role="img" aria-label={cp.title}>
+									{cp.icon}
+								</span>
+								<div class="cp-heading">
+									<h3 class="cp-title">{cp.title}</h3>
+									<p class="cp-subtitle">{cp.subtitle}</p>
+								</div>
 							</div>
-						))
-					}
-				</div>
 
-				<!-- Cards de destaque -->
-				<div class="space-y-3">
-					<div
-						class="flex items-start gap-4 bg-slate-800/40 border border-slate-700/30 rounded-xl p-4"
-					>
-						<span class="text-indigo-400 mt-0.5 shrink-0">
-							<svg
-								xmlns="http://www.w3.org/2000/svg"
-								class="w-5 h-5"
-								fill="none"
-								viewBox="0 0 24 24"
-								stroke="currentColor"
-							>
-								<path
-									stroke-linecap="round"
-									stroke-linejoin="round"
-									stroke-width="2"
-									d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-							</svg>
-						</span>
-						<div>
-							<p class="text-slate-200 font-medium text-sm">
-								Criação de produtos
-							</p>
-							<p class="text-slate-400 text-xs mt-0.5">
-								Totem de acesso, portais de varejistas, apps mobile, mecânicas
-								de game
-							</p>
-						</div>
-					</div>
+							<div class="cp-tags">
+								{cp.tags.map((tag) => (
+									<span class={`cp-tag cp-tag--${tag.type}`}>{tag.label}</span>
+								))}
+							</div>
 
-					<div
-						class="flex items-start gap-4 bg-slate-800/40 border border-slate-700/30 rounded-xl p-4"
-					>
-						<span class="text-indigo-400 mt-0.5 shrink-0">
-							<svg
-								xmlns="http://www.w3.org/2000/svg"
-								class="w-5 h-5"
-								fill="none"
-								viewBox="0 0 24 24"
-								stroke="currentColor"
-							>
-								<path
-									stroke-linecap="round"
-									stroke-linejoin="round"
-									stroke-width="2"
-									d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-							</svg>
-						</span>
-						<div>
-							<p class="text-slate-200 font-medium text-sm">
-								Integrações complexas
-							</p>
-							<p class="text-slate-400 text-xs mt-0.5">
-								Bancos, boleto, webhook de pagamento, SPC, Serasa, B2E, email,
-								SMS e push
-							</p>
-						</div>
+							<p class="cp-desc">{cp.description}</p>
+						</article>
 					</div>
-
-					<div
-						class="flex items-start gap-4 bg-slate-800/40 border border-slate-700/30 rounded-xl p-4"
-					>
-						<span class="text-indigo-400 mt-0.5 shrink-0">
-							<svg
-								xmlns="http://www.w3.org/2000/svg"
-								class="w-5 h-5"
-								fill="none"
-								viewBox="0 0 24 24"
-								stroke="currentColor"
-							>
-								<path
-									stroke-linecap="round"
-									stroke-linejoin="round"
-									stroke-width="2"
-									d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-							</svg>
-						</span>
-						<div>
-							<p class="text-slate-200 font-medium text-sm">
-								Gestão & liderança
-							</p>
-							<p class="text-slate-400 text-xs mt-0.5">
-								Head of Development, modernização de stack, definição de
-								arquitetura
-							</p>
-						</div>
-					</div>
-				</div>
-			</div>
+				))
+			}
 		</div>
 	</div>
 </section>
+
+<style>
+	/* ─── Timeline wrapper ─────────────────────────────────────── */
+	.timeline {
+		position: relative;
+	}
+
+	.timeline-line {
+		position: absolute;
+		top: 1.25rem;
+		bottom: 1.25rem;
+		left: 1.5rem;
+		width: 1px;
+		background: linear-gradient(
+			to bottom,
+			transparent,
+			#334155 8%,
+			#334155 92%,
+			transparent
+		);
+		pointer-events: none;
+	}
+
+	/* ─── Row ──────────────────────────────────────────────────── */
+	.timeline-row {
+		position: relative;
+		display: grid;
+		grid-template-columns: 3.25rem 1fr;
+		gap: 0 1.25rem;
+		align-items: start;
+		padding-bottom: 2.25rem;
+	}
+
+	.timeline-row:last-child {
+		padding-bottom: 0;
+	}
+
+	/* ─── Year badge ───────────────────────────────────────────── */
+	.year-badge {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		padding-top: 1rem;
+		position: relative;
+		z-index: 1;
+	}
+
+	.year-dot {
+		width: 14px;
+		height: 14px;
+		border-radius: 9999px;
+		background: #0f172a;
+		border: 2px solid #334155;
+		flex-shrink: 0;
+		transition:
+			background 0.4s ease,
+			border-color 0.4s ease,
+			box-shadow 0.4s ease;
+	}
+
+	.year-text {
+		font-size: 0.625rem;
+		font-weight: 700;
+		color: #475569;
+		margin-top: 6px;
+		letter-spacing: 0.03em;
+		transition: color 0.4s ease;
+	}
+
+	/* ─── Card ─────────────────────────────────────────────────── */
+	.checkpoint-card {
+		background: rgba(30, 41, 59, 0.5);
+		border: 1px solid rgba(71, 85, 105, 0.4);
+		border-radius: 0.75rem;
+		padding: 1.125rem;
+		opacity: 0;
+		transform: translateY(14px);
+		transition:
+			opacity 0.5s ease,
+			transform 0.5s ease,
+			border-color 0.4s ease;
+	}
+
+	.cp-header {
+		display: flex;
+		align-items: flex-start;
+		gap: 0.75rem;
+		margin-bottom: 0.625rem;
+	}
+
+	.cp-icon {
+		font-size: 1.375rem;
+		line-height: 1;
+		flex-shrink: 0;
+		margin-top: 0.1rem;
+	}
+
+	.cp-heading {
+		min-width: 0;
+	}
+
+	.cp-title {
+		font-size: 0.9375rem;
+		font-weight: 600;
+		color: #f1f5f9;
+		margin: 0 0 0.15rem;
+		line-height: 1.3;
+	}
+
+	.cp-subtitle {
+		font-size: 0.725rem;
+		color: #64748b;
+		margin: 0;
+	}
+
+	.cp-tags {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.3rem;
+		margin-bottom: 0.75rem;
+	}
+
+	.cp-tag {
+		font-size: 0.675rem;
+		font-weight: 500;
+		padding: 0.2rem 0.55rem;
+		border-radius: 9999px;
+		border: 1px solid;
+	}
+
+	.cp-tag--edu {
+		background: rgba(20, 184, 166, 0.08);
+		border-color: rgba(20, 184, 166, 0.25);
+		color: #5eead4;
+	}
+
+	.cp-tag--work {
+		background: rgba(99, 102, 241, 0.08);
+		border-color: rgba(99, 102, 241, 0.25);
+		color: #a5b4fc;
+	}
+
+	.cp-tag--achievement {
+		background: rgba(245, 158, 11, 0.08);
+		border-color: rgba(245, 158, 11, 0.25);
+		color: #fbbf24;
+	}
+
+	.cp-desc {
+		font-size: 0.8125rem;
+		color: #94a3b8;
+		line-height: 1.65;
+		margin: 0;
+	}
+
+	/* ─── Visible (set by JS) ──────────────────────────────────── */
+	.timeline-row.is-visible .checkpoint-card {
+		opacity: 1;
+		transform: translateY(0);
+	}
+
+	.timeline-row.is-visible .year-dot {
+		background: #6366f1;
+		border-color: #6366f1;
+		box-shadow: 0 0 12px rgba(99, 102, 241, 0.45);
+	}
+
+	.timeline-row.is-visible .year-text {
+		color: #818cf8;
+	}
+
+	.timeline-row.is-visible .checkpoint-card {
+		border-color: rgba(99, 102, 241, 0.2);
+	}
+
+	/* ─── Desktop: alternating ─────────────────────────────────── */
+	@media (min-width: 768px) {
+		.timeline-line {
+			left: 50%;
+			transform: translateX(-50%);
+		}
+
+		.timeline-row {
+			grid-template-columns: 1fr 5rem 1fr;
+			align-items: center;
+			gap: 0 1.5rem;
+		}
+
+		.year-badge {
+			grid-column: 2;
+			grid-row: 1;
+			padding-top: 0;
+		}
+
+		/* Card na esquerda */
+		.timeline-row[data-side="left"] .checkpoint-card {
+			grid-column: 1;
+			grid-row: 1;
+			text-align: right;
+		}
+
+		.timeline-row[data-side="left"] .cp-header {
+			flex-direction: row-reverse;
+		}
+
+		.timeline-row[data-side="left"] .cp-tags {
+			justify-content: flex-end;
+		}
+
+		/* Card na direita */
+		.timeline-row[data-side="right"] .checkpoint-card {
+			grid-column: 3;
+			grid-row: 1;
+		}
+
+		/* Animação direcional no desktop */
+		.timeline-row[data-side="left"] .checkpoint-card {
+			transform: translateX(-14px);
+		}
+
+		.timeline-row[data-side="right"] .checkpoint-card {
+			transform: translateX(14px);
+		}
+
+		.timeline-row.is-visible .checkpoint-card {
+			transform: translate(0, 0);
+		}
+	}
+</style>
+
+<script>
+	const rows = document.querySelectorAll<HTMLElement>(".timeline-row");
+
+	const observer = new IntersectionObserver(
+		(entries) => {
+			entries.forEach((entry) => {
+				if (entry.isIntersecting) {
+					entry.target.classList.add("is-visible");
+				}
+			});
+		},
+		{ threshold: 0.15 },
+	);
+
+	rows.forEach((row) => observer.observe(row));
+</script>
