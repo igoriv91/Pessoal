@@ -1,69 +1,6 @@
 ---
-interface Project {
-	title: string;
-	description: string;
-	tags: string[];
-	icon: string;
-}
-
-const projects: Project[] = [
-	{
-		title: "Terminal de Acesso (Totem)",
-		description:
-			"Criação de sistema para totens de autoatendimento, com interface touch, controle de acesso e integração com sistemas internos.",
-		tags: ["Embedded", "UX Touch", "Integração"],
-		icon: "🖥️",
-	},
-	{
-		title: "Portais de Clientes",
-		description:
-			"Desenvolvimento de portais personalizados para grandes varejistas do Brasil, com funcionalidades de CRM, relatórios e gestão de campanhas.",
-		tags: ["React.js", "TypeScript", "CRM"],
-		icon: "🏬",
-	},
-	{
-		title: "Aplicativos Mobile",
-		description:
-			"Participação na criação de diversos aplicativos publicados nas lojas Android e iOS, incluindo submissão, aprovação e atualizações nas lojas.",
-		tags: ["React Native", "Play Store", "App Store"],
-		icon: "📱",
-	},
-	{
-		title: "Sistemas de Fidelização",
-		description:
-			"Implantação de plataformas completas de fidelidade: cartão próprio, convênio, alimentação, cartão presente e gestão de custódia de cheques.",
-		tags: ["CRM", "Fidelização", "Financeiro"],
-		icon: "🎁",
-	},
-	{
-		title: "Integrações Bancárias",
-		description:
-			"Integração com bancos via arquivo e API para registro de boletos, processamento de webhook de pagamento e conciliação financeira.",
-		tags: ["Node.js", "API", "Financeiro"],
-		icon: "🏦",
-	},
-	{
-		title: "Consulta de Crédito & Mensageria",
-		description:
-			"Integrações com SPC, Serasa e B2E para análise de crédito em tempo real. Sistema de mensageria via e-mail, SMS e push notification.",
-		tags: ["SPC", "Serasa", "SMS", "Push"],
-		icon: "📊",
-	},
-	{
-		title: "Mecânica de Games & Sorteios",
-		description:
-			"Criação de sistemas de cupons de sorteio para campanhas de brindes e descontos, com mecânica de gamificação para engajamento dos clientes.",
-		tags: ["Gamificação", "Campanhas", "CRM"],
-		icon: "🎮",
-	},
-	{
-		title: "Modernização de Stack",
-		description:
-			"Como Head of Development, liderando a migração completa dos produtos legados para novas tecnologias, arquitetura moderna e melhores práticas.",
-		tags: ["Liderança", "TypeScript", "Arquitetura"],
-		icon: "🚀",
-	},
-];
+import { Icon } from "astro-icon/components";
+import { projects } from "../../data/projects";
 ---
 
 <section id="projetos" class="py-24 bg-slate-900/50 flex justify-center">
@@ -87,8 +24,8 @@ const projects: Project[] = [
 			{
 				projects.map((project) => (
 					<article class="bg-slate-800/50 border border-slate-700/40 hover:border-indigo-500/30 rounded-xl p-6 transition-all duration-200 hover:bg-slate-800/70 flex flex-col">
-						<span class="text-3xl mb-4 block" role="img" aria-hidden="true">
-							{project.icon}
+						<span class="w-8 h-8 mb-4 block text-indigo-400" aria-hidden="true">
+							<Icon name={project.icon} class="w-full h-full" />
 						</span>
 						<h3 class="text-slate-100 font-semibold text-base mb-2">
 							{project.title}

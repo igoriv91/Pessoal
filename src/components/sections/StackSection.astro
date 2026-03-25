@@ -1,29 +1,6 @@
 ---
-interface TechItem {
-	name: string;
-	category: string;
-	icon: string;
-}
-
-const stack: TechItem[] = [
-	{ name: "React.js", category: "Frontend", icon: "⚛️" },
-	{ name: "React Native", category: "Mobile", icon: "📱" },
-	{ name: "TypeScript", category: "Linguagem", icon: "🔷" },
-	{ name: "Node.js", category: "Backend", icon: "🟢" },
-	{ name: "SQL Server", category: "Banco de Dados", icon: "🗄️" },
-	{ name: "Oracle DB", category: "Banco de Dados", icon: "🔴" },
-];
-
-const extras = [
-	"REST APIs",
-	"Webhooks",
-	"Push Notification",
-	"Git",
-	"Android / iOS",
-	"Play Store / App Store",
-	"CRM",
-	"Integrações Bancárias",
-];
+import { Icon } from "astro-icon/components";
+import { stack, extras, SKILL_LEVELS } from "../../data/stack";
 ---
 
 <section id="stack" class="py-24 flex justify-center">
@@ -44,11 +21,31 @@ const extras = [
 			{
 				stack.map((tech) => (
 					<div class="group bg-slate-800/60 border border-slate-700/50 hover:border-indigo-500/50 rounded-xl p-5 text-center transition-all duration-200 hover:bg-slate-800">
-						<span class="text-3xl mb-3 block" role="img" aria-hidden="true">
-							{tech.icon}
+						<span
+							class="w-8 h-8 mb-3 mx-auto block"
+							style={`color: ${tech.iconColor}`}
+							aria-hidden="true"
+						>
+							<Icon name={tech.icon} class="w-full h-full" />
 						</span>
 						<p class="text-slate-100 font-semibold text-sm mb-1">{tech.name}</p>
-						<p class="text-slate-500 text-xs">{tech.category}</p>
+						<p class="text-slate-500 text-xs mb-3">{tech.category}</p>
+						<p class="text-[10px] text-transparent group-hover:text-slate-400 transition-colors duration-200">
+							{SKILL_LEVELS[tech.level]}
+						</p>
+						<div class="flex gap-1 mt-1">
+							{Array.from({ length: 5 }, (_, i) => (
+								<span
+									class="flex-1 h-1 rounded-sm"
+									style={
+										i < tech.level
+											? `background-color: ${tech.iconColor}`
+											: undefined
+									}
+									class:list={[i >= tech.level && "bg-slate-700/60"]}
+								/>
+							))}
+						</div>
 					</div>
 				))
 			}
