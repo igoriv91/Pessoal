@@ -10,7 +10,9 @@
       "PowerShell(New-NetFirewallRule -DisplayName \"Astro Dev 4321\" -Direction Inbound -Protocol TCP -LocalPort 4321 -Action Allow -ErrorAction SilentlyContinue)",
       "PowerShell(Get-NetConnectionProfile)",
       "PowerShell(Get-NetIPAddress -AddressFamily IPv4 | Where-Object {$_.PrefixOrigin -ne \"WellKnown\"} | Select-Object IPAddress, InterfaceAlias, InterfaceIndex)",
-      "Bash(ipconfig /all)"
+      "Bash(ipconfig /all)",
+      "Bash(ssh -T pessoal)",
+      "Bash(git push *)"
     ]
   }
 }
