@@ -1,0 +1,392 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { livros } from '../data/livros/uma-vida-com-propositos';
+
+const dadosLivros = JSON.stringify(livros);
+---
+
+<BaseLayout
+  title="Leitura — Uma Vida com Propósitos"
+  description="Acompanhe o desafio de 40 dias do livro Uma Vida com Propósitos de Rick Warren."
+>
+  <div class="min-h-screen bg-slate-950 text-slate-100 font-sans">
+
+    <!-- Header -->
+    <header class="fixed top-0 left-0 right-0 z-50 border-b border-slate-800/60 bg-slate-950/80 backdrop-blur-sm">
+      <div class="max-w-4xl mx-auto px-4 h-14 flex items-center justify-between">
+        <a href="/" class="text-slate-400 hover:text-indigo-400 transition-colors text-sm flex items-center gap-2">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 256 256" fill="currentColor">
+            <path d="M224,128a8,8,0,0,1-8,8H59.31l58.35,58.34a8,8,0,0,1-11.32,11.32l-72-72a8,8,0,0,1,0-11.32l72-72a8,8,0,0,1,11.32,11.32L59.31,120H216A8,8,0,0,1,224,128Z"/>
+          </svg>
+          Voltar ao portfólio
+        </a>
+        <span id="header-title" class="text-sm text-slate-500 hidden">Leitura</span>
+      </div>
+    </header>
+
+    <main class="pt-14 pb-16">
+
+      <!-- VIEW: Seleção de Livro -->
+      <div id="view-livros" class="max-w-4xl mx-auto px-4 py-12">
+        <div class="mb-10">
+          <h1 class="text-3xl font-bold text-slate-100 mb-2">Minha Leitura</h1>
+          <p class="text-slate-400">Selecione um livro para começar ou continuar sua leitura.</p>
+        </div>
+
+        <div id="lista-livros" class="grid gap-4 sm:grid-cols-2"></div>
+      </div>
+
+      <!-- VIEW: Grade de Dias -->
+      <div id="view-dias" class="max-w-4xl mx-auto px-4 py-12 hidden">
+        <button id="btn-voltar-livros" class="mb-8 text-slate-400 hover:text-indigo-400 transition-colors text-sm flex items-center gap-2">
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 256 256" fill="currentColor">
+            <path d="M224,128a8,8,0,0,1-8,8H59.31l58.35,58.34a8,8,0,0,1-11.32,11.32l-72-72a8,8,0,0,1,0-11.32l72-72a8,8,0,0,1,11.32,11.32L59.31,120H216A8,8,0,0,1,224,128Z"/>
+          </svg>
+          Trocar livro
+        </button>
+
+        <div class="mb-8 flex items-start justify-between flex-wrap gap-4">
+          <div>
+            <h2 id="livro-titulo" class="text-2xl font-bold text-slate-100 mb-1"></h2>
+            <p id="livro-autor" class="text-indigo-400 text-sm font-medium"></p>
+          </div>
+          <div class="text-right">
+            <div id="progresso-texto" class="text-sm text-slate-400 mb-1"></div>
+            <div class="w-48 h-1.5 bg-slate-800 rounded-full overflow-hidden">
+              <div id="progresso-barra" class="h-full bg-indigo-500 rounded-full transition-all duration-500" style="width: 0%"></div>
+            </div>
+          </div>
+        </div>
+
+        <div id="grade-dias" class="grid grid-cols-5 sm:grid-cols-8 gap-2"></div>
+      </div>
+
+      <!-- VIEW: Conteúdo do Dia -->
+      <div id="view-conteudo" class="hidden">
+        <div class="max-w-2xl mx-auto px-4 py-10">
+          <button id="btn-voltar-dias" class="mb-8 text-slate-400 hover:text-indigo-400 transition-colors text-sm flex items-center gap-2">
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 256 256" fill="currentColor">
+              <path d="M224,128a8,8,0,0,1-8,8H59.31l58.35,58.34a8,8,0,0,1-11.32,11.32l-72-72a8,8,0,0,1,0-11.32l72-72a8,8,0,0,1,11.32,11.32L59.31,120H216A8,8,0,0,1,224,128Z"/>
+            </svg>
+            Todos os dias
+          </button>
+
+          <div class="mb-2 text-indigo-400 text-xs font-semibold uppercase tracking-widest" id="dia-numero"></div>
+          <h2 id="dia-titulo" class="text-2xl sm:text-3xl font-bold text-slate-100 mb-6 leading-tight"></h2>
+
+          <!-- Versículo de abertura -->
+          <blockquote id="dia-versiculo-bloco" class="mb-8 border-l-2 border-indigo-500 pl-4 hidden">
+            <p id="dia-versiculo" class="text-slate-300 italic leading-relaxed"></p>
+            <footer id="dia-versiculo-ref" class="mt-2 text-indigo-400 text-sm font-medium"></footer>
+          </blockquote>
+
+          <!-- Conteúdo -->
+          <div id="dia-conteudo" class="prose-custom space-y-4 mb-10"></div>
+
+          <!-- Pense nisso -->
+          <div id="dia-pensamento-bloco" class="hidden mb-8 bg-slate-800/50 border border-slate-700/50 rounded-xl p-5">
+            <div class="text-xs font-semibold uppercase tracking-widest text-indigo-400 mb-2">Pense nisso</div>
+            <p id="dia-pensamento" class="text-slate-200 leading-relaxed"></p>
+          </div>
+
+          <!-- Versículo para memorizar -->
+          <div id="dia-mem-bloco" class="hidden mb-10 bg-indigo-950/40 border border-indigo-800/30 rounded-xl p-5">
+            <div class="text-xs font-semibold uppercase tracking-widest text-indigo-400 mb-2">Versículo para memorizar</div>
+            <p id="dia-mem-versiculo" class="text-slate-200 italic leading-relaxed mb-1"></p>
+            <p id="dia-mem-ref" class="text-indigo-400 text-sm font-medium"></p>
+          </div>
+
+          <!-- Ações -->
+          <div class="flex items-center justify-between gap-4 pt-6 border-t border-slate-800">
+            <button id="btn-dia-anterior" class="text-sm text-slate-400 hover:text-slate-200 transition-colors flex items-center gap-2 disabled:opacity-30 disabled:cursor-not-allowed">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 256 256" fill="currentColor">
+                <path d="M224,128a8,8,0,0,1-8,8H59.31l58.35,58.34a8,8,0,0,1-11.32,11.32l-72-72a8,8,0,0,1,0-11.32l72-72a8,8,0,0,1,11.32,11.32L59.31,120H216A8,8,0,0,1,224,128Z"/>
+              </svg>
+              Dia anterior
+            </button>
+
+            <button id="btn-marcar-lido" class="px-5 py-2.5 rounded-lg text-sm font-semibold transition-all duration-200">
+            </button>
+
+            <button id="btn-proximo-dia" class="text-sm text-slate-400 hover:text-slate-200 transition-colors flex items-center gap-2 disabled:opacity-30 disabled:cursor-not-allowed">
+              Próximo dia
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 256 256" fill="currentColor">
+                <path d="M40,128a8,8,0,0,1,8-8H196.69L138.34,61.66a8,8,0,0,1,11.32-11.32l72,72a8,8,0,0,1,0,11.32l-72,72a8,8,0,0,1-11.32-11.32L196.69,136H48A8,8,0,0,1,40,128Z"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </main>
+  </div>
+</BaseLayout>
+
+<style>
+  .prose-custom p {
+    color: rgb(203 213 225);
+    line-height: 1.75;
+  }
+  .card-dia {
+    aspect-ratio: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0.5rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    border: 1px solid;
+    position: relative;
+  }
+  .card-dia:hover {
+    transform: scale(1.05);
+  }
+  .card-dia.lido {
+    background-color: rgb(79 70 229 / 0.2);
+    border-color: rgb(99 102 241 / 0.4);
+    color: rgb(165 180 252);
+  }
+  .card-dia.lido::after {
+    content: '✓';
+    position: absolute;
+    top: 2px;
+    right: 5px;
+    font-size: 0.6rem;
+    color: rgb(99 102 241);
+  }
+  .card-dia.nao-lido {
+    background-color: rgb(15 23 42);
+    border-color: rgb(30 41 59);
+    color: rgb(71 85 105);
+  }
+  .card-dia.nao-lido:hover {
+    border-color: rgb(99 102 241 / 0.4);
+    color: rgb(148 163 184);
+  }
+  .card-dia.atual {
+    background-color: rgb(79 70 229);
+    border-color: rgb(99 102 241);
+    color: white;
+    box-shadow: 0 0 0 2px rgb(79 70 229 / 0.3);
+  }
+</style>
+
+<script define:vars={{ dadosLivros }}>
+  const livros = JSON.parse(dadosLivros);
+  const STORAGE_KEY = 'leitura-progresso';
+
+  function getProgresso() {
+    try {
+      return JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+    } catch {
+      return {};
+    }
+  }
+
+  function salvarProgresso(progresso) {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(progresso));
+  }
+
+  function isDiaLido(livroId, dia) {
+    const p = getProgresso();
+    return !!(p[livroId] && p[livroId].includes(dia));
+  }
+
+  function toggleDiaLido(livroId, dia) {
+    const p = getProgresso();
+    if (!p[livroId]) p[livroId] = [];
+    const idx = p[livroId].indexOf(dia);
+    if (idx >= 0) {
+      p[livroId].splice(idx, 1);
+    } else {
+      p[livroId].push(dia);
+    }
+    salvarProgresso(p);
+  }
+
+  function getDiasLidos(livroId) {
+    const p = getProgresso();
+    return p[livroId] || [];
+  }
+
+  // State
+  let livroAtual = null;
+  let diaAtual = null;
+
+  // Views
+  const viewLivros = document.getElementById('view-livros');
+  const viewDias = document.getElementById('view-dias');
+  const viewConteudo = document.getElementById('view-conteudo');
+
+  function mostrarView(view) {
+    viewLivros.classList.add('hidden');
+    viewDias.classList.add('hidden');
+    viewConteudo.classList.add('hidden');
+    view.classList.remove('hidden');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  // --- VIEW: Livros ---
+  function renderLivros() {
+    const lista = document.getElementById('lista-livros');
+    lista.innerHTML = '';
+    livros.forEach(livro => {
+      const lidos = getDiasLidos(livro.id).length;
+      const pct = Math.round((lidos / livro.totalDias) * 100);
+      const card = document.createElement('button');
+      card.className = 'text-left p-5 rounded-xl border border-slate-800 bg-slate-900/50 hover:border-indigo-500/50 hover:bg-slate-800/50 transition-all duration-200 group';
+      card.innerHTML = `
+        <div class="flex items-start justify-between mb-3">
+          <div class="w-10 h-10 rounded-lg bg-indigo-900/50 border border-indigo-700/30 flex items-center justify-center text-indigo-400">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 256 256" fill="currentColor">
+              <path d="M232,48H160a40,40,0,0,0-32,16A40,40,0,0,0,96,48H24A16,16,0,0,0,8,64V192a16,16,0,0,0,16,16H96a24,24,0,0,1,24,24,8,8,0,0,0,16,0,24,24,0,0,1,24-24h72a16,16,0,0,0,16-16V64A16,16,0,0,0,232,48ZM96,192H24V64H96a24,24,0,0,1,24,24V200A40,40,0,0,0,96,192Zm136,0H160a40,40,0,0,0-24,8V88a24,24,0,0,1,24-24h72Z"/>
+            </svg>
+          </div>
+          <span class="text-xs text-slate-500">${livro.totalDias} dias</span>
+        </div>
+        <h3 class="font-bold text-slate-100 group-hover:text-indigo-300 transition-colors mb-1">${livro.titulo}</h3>
+        <p class="text-xs text-slate-500 mb-1">${livro.autor}</p>
+        <p class="text-xs text-slate-500 mb-4 leading-relaxed">${livro.descricao}</p>
+        <div class="flex items-center justify-between text-xs text-slate-500 mb-2">
+          <span>${lidos} de ${livro.totalDias} dias lidos</span>
+          <span class="text-indigo-400 font-semibold">${pct}%</span>
+        </div>
+        <div class="h-1 bg-slate-800 rounded-full overflow-hidden">
+          <div class="h-full bg-indigo-500 rounded-full transition-all duration-500" style="width: ${pct}%"></div>
+        </div>
+      `;
+      card.addEventListener('click', () => {
+        livroAtual = livro;
+        renderDias();
+        mostrarView(viewDias);
+      });
+      lista.appendChild(card);
+    });
+    mostrarView(viewLivros);
+  }
+
+  // --- VIEW: Dias ---
+  function renderDias() {
+    if (!livroAtual) return;
+    document.getElementById('livro-titulo').textContent = livroAtual.titulo;
+    document.getElementById('livro-autor').textContent = livroAtual.autor;
+
+    const lidos = getDiasLidos(livroAtual.id);
+    const pct = Math.round((lidos.length / livroAtual.totalDias) * 100);
+    document.getElementById('progresso-texto').textContent = `${lidos.length} de ${livroAtual.totalDias} dias lidos`;
+    document.getElementById('progresso-barra').style.width = `${pct}%`;
+
+    const grade = document.getElementById('grade-dias');
+    grade.innerHTML = '';
+
+    livroAtual.dias.forEach(dia => {
+      const lido = lidos.includes(dia.dia);
+      const isAtual = dia.dia === diaAtual?.dia;
+      const card = document.createElement('button');
+      card.className = `card-dia ${lido ? 'lido' : 'nao-lido'} ${isAtual ? 'atual' : ''}`;
+      card.title = dia.titulo;
+      card.innerHTML = `<span>${dia.dia}</span>`;
+      card.addEventListener('click', () => {
+        diaAtual = dia;
+        renderConteudo();
+        mostrarView(viewConteudo);
+      });
+      grade.appendChild(card);
+    });
+  }
+
+  // --- VIEW: Conteúdo ---
+  function renderConteudo() {
+    if (!diaAtual || !livroAtual) return;
+    const dia = diaAtual;
+
+    document.getElementById('dia-numero').textContent = `Dia ${dia.dia} de ${livroAtual.totalDias}`;
+    document.getElementById('dia-titulo').textContent = dia.titulo;
+
+    const versiculoBloco = document.getElementById('dia-versiculo-bloco');
+    if (dia.versiculo) {
+      document.getElementById('dia-versiculo').textContent = dia.versiculo;
+      document.getElementById('dia-versiculo-ref').textContent = dia.versiculoRef;
+      versiculoBloco.classList.remove('hidden');
+    } else {
+      versiculoBloco.classList.add('hidden');
+    }
+
+    const conteudoEl = document.getElementById('dia-conteudo');
+    conteudoEl.innerHTML = dia.conteudo.map(p => `<p>${p}</p>`).join('');
+
+    const pensamentoBloco = document.getElementById('dia-pensamento-bloco');
+    if (dia.pensamento) {
+      document.getElementById('dia-pensamento').textContent = dia.pensamento;
+      pensamentoBloco.classList.remove('hidden');
+    } else {
+      pensamentoBloco.classList.add('hidden');
+    }
+
+    const memBloco = document.getElementById('dia-mem-bloco');
+    if (dia.versiculoMemorizacao) {
+      document.getElementById('dia-mem-versiculo').textContent = dia.versiculoMemorizacao;
+      document.getElementById('dia-mem-ref').textContent = dia.versiculoMemorizacaoRef;
+      memBloco.classList.remove('hidden');
+    } else {
+      memBloco.classList.add('hidden');
+    }
+
+    const lido = isDiaLido(livroAtual.id, dia.dia);
+    const btnMarcar = document.getElementById('btn-marcar-lido');
+    atualizarBtnMarcar(btnMarcar, lido);
+
+    const btnAnterior = document.getElementById('btn-dia-anterior');
+    const btnProximo = document.getElementById('btn-proximo-dia');
+    btnAnterior.disabled = dia.dia <= 1;
+    btnProximo.disabled = dia.dia >= livroAtual.totalDias;
+  }
+
+  function atualizarBtnMarcar(btn, lido) {
+    if (lido) {
+      btn.textContent = '✓ Lido';
+      btn.className = 'px-5 py-2.5 rounded-lg text-sm font-semibold transition-all duration-200 bg-indigo-900/50 border border-indigo-700/50 text-indigo-300 hover:bg-red-900/30 hover:border-red-700/50 hover:text-red-400';
+    } else {
+      btn.textContent = 'Marcar como lido';
+      btn.className = 'px-5 py-2.5 rounded-lg text-sm font-semibold transition-all duration-200 bg-indigo-600 hover:bg-indigo-500 text-white';
+    }
+  }
+
+  // Eventos
+  document.getElementById('btn-voltar-livros').addEventListener('click', () => {
+    diaAtual = null;
+    renderLivros();
+  });
+
+  document.getElementById('btn-voltar-dias').addEventListener('click', () => {
+    renderDias();
+    mostrarView(viewDias);
+  });
+
+  document.getElementById('btn-marcar-lido').addEventListener('click', () => {
+    if (!livroAtual || !diaAtual) return;
+    toggleDiaLido(livroAtual.id, diaAtual.dia);
+    const lido = isDiaLido(livroAtual.id, diaAtual.dia);
+    atualizarBtnMarcar(document.getElementById('btn-marcar-lido'), lido);
+  });
+
+  document.getElementById('btn-dia-anterior').addEventListener('click', () => {
+    if (!diaAtual || diaAtual.dia <= 1) return;
+    diaAtual = livroAtual.dias[diaAtual.dia - 2];
+    renderConteudo();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  document.getElementById('btn-proximo-dia').addEventListener('click', () => {
+    if (!diaAtual || diaAtual.dia >= livroAtual.totalDias) return;
+    diaAtual = livroAtual.dias[diaAtual.dia];
+    renderConteudo();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  // Init
+  renderLivros();
+</script>

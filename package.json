@@ -16,7 +16,7 @@
     "@iconify-json/simple-icons": "^1.2.75",
     "@tailwindcss/vite": "^4.2.2",
     "@types/tailwindcss": "^3.0.11",
-    "astro": "^6.0.8",
+    "astro": "^6.3.1",
     "astro-icon": "^1.1.5",
     "tailwindcss": "^4.2.2"
   }
