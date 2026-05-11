@@ -281,6 +281,24 @@ const dadosLivros = JSON.stringify(livros);
     border-color: var(--lp-accent-border);
     color: var(--lp-text-muted);
   }
+  .card-dia.bloqueado {
+    background-color: var(--lp-day-empty);
+    border-color: var(--lp-day-empty-bd);
+    color: var(--lp-day-empty-text);
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+  .card-dia.bloqueado:hover {
+    transform: none;
+    border-color: var(--lp-day-empty-bd);
+    color: var(--lp-day-empty-text);
+  }
+  .card-dia.bloqueado .lock-icon {
+    position: absolute;
+    top: 3px;
+    right: 4px;
+    opacity: 0.5;
+  }
   .card-dia.atual {
     background-color: var(--lp-accent);
     border-color: var(--lp-accent);
@@ -395,13 +413,27 @@ const dadosLivros = JSON.stringify(livros);
     const grade = document.getElementById('grade-dias');
     grade.innerHTML = '';
     livroAtual.dias.forEach(dia => {
-      const lido   = lidos.includes(dia.dia);
-      const isAtual = dia.dia === diaAtual?.dia;
-      const card   = document.createElement('button');
-      card.className = `card-dia ${lido ? 'lido' : 'nao-lido'} ${isAtual ? 'atual' : ''}`;
-      card.title     = dia.titulo;
-      card.innerHTML = `<span>${dia.dia}</span>`;
-      card.addEventListener('click', () => { diaAtual = dia; renderConteudo(); mostrarView(viewConteudo); });
+      const bloqueado = dia.disponivel === false;
+      const lido      = !bloqueado && lidos.includes(dia.dia);
+      const isAtual   = !bloqueado && dia.dia === diaAtual?.dia;
+      const card      = document.createElement('button');
+
+      let classe = 'card-dia ';
+      if (bloqueado)   classe += 'bloqueado';
+      else if (lido)   classe += 'lido';
+      else if (isAtual) classe += 'atual';
+      else              classe += 'nao-lido';
+
+      card.className = classe;
+      card.title     = bloqueado ? `Dia ${dia.dia} — ainda não disponível` : dia.titulo;
+      card.disabled  = bloqueado;
+      card.innerHTML = bloqueado
+        ? `<span>${dia.dia}</span><svg class="lock-icon" xmlns="http://www.w3.org/2000/svg" width="8" height="8" viewBox="0 0 256 256" fill="currentColor"><path d="M208,96H176V72a48,48,0,0,0-96,0V96H48A16,16,0,0,0,32,112V208a16,16,0,0,0,16,16H208a16,16,0,0,0,16-16V112A16,16,0,0,0,208,96ZM96,72a32,32,0,0,1,64,0V96H96ZM208,208H48V112H208V208Z"/></svg>`
+        : `<span>${dia.dia}</span>`;
+
+      if (!bloqueado) {
+        card.addEventListener('click', () => { diaAtual = dia; renderConteudo(); mostrarView(viewConteudo); });
+      }
       grade.appendChild(card);
     });
   }
