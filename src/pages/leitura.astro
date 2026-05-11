@@ -127,6 +127,16 @@ const dadosLivros = JSON.stringify(livros);
               </svg>
             </button>
           </div>
+
+          <!-- Compartilhar -->
+          <div class="flex justify-center mt-6">
+            <button id="btn-compartilhar" class="lp-share-btn text-xs flex items-center gap-1.5 px-3 py-1.5 rounded-lg transition-all">
+              <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 256 256" fill="currentColor">
+                <path d="M229.66,109.66l-48,48a8,8,0,0,1-11.32-11.32L204.69,112H165a88.21,88.21,0,0,0-75.06,42.34,8,8,0,0,1-13.69-8.3A104.27,104.27,0,0,1,165,96h39.69L170.34,61.66a8,8,0,0,1,11.32-11.32l48,48A8,8,0,0,1,229.66,109.66ZM192,208H40V88a8,8,0,0,0-16,0V208a16,16,0,0,0,16,16H192a8,8,0,0,0,0-16Z"/>
+              </svg>
+              <span id="btn-compartilhar-label">Copiar link do dia</span>
+            </button>
+          </div>
         </div>
       </div>
 
@@ -218,6 +228,8 @@ const dadosLivros = JSON.stringify(livros);
   .lp-nav-btn:hover  { color: var(--lp-text); }
   .lp-tema-btn { background-color: var(--lp-tema-btn-bg); color: var(--lp-text-muted); }
   .lp-tema-btn:hover { background-color: var(--lp-tema-btn-hover); color: var(--lp-text); }
+  .lp-share-btn { background-color: var(--lp-tema-btn-bg); color: var(--lp-text-subtle); }
+  .lp-share-btn:hover { background-color: var(--lp-tema-btn-hover); color: var(--lp-text-muted); }
 
   .lp-card {
     text-align: left;
@@ -358,10 +370,26 @@ const dadosLivros = JSON.stringify(livros);
   const viewDias     = document.getElementById('view-dias');
   const viewConteudo = document.getElementById('view-conteudo');
 
+  /* ─── URL params ─────────────────────────────────────── */
+  function atualizarURL(livroId, dia) {
+    const params = new URLSearchParams();
+    if (livroId) params.set('livro', livroId);
+    if (dia)     params.set('dia', dia);
+    const query = params.toString();
+    history.replaceState(null, '', query ? `?${query}` : window.location.pathname);
+  }
+
+  function limparURL() {
+    history.replaceState(null, '', window.location.pathname);
+  }
+
   function mostrarView(view) {
     [viewLivros, viewDias, viewConteudo].forEach(v => v.classList.add('hidden'));
     view.classList.remove('hidden');
     window.scrollTo({ top: 0, behavior: 'smooth' });
+    if (view === viewLivros)                              limparURL();
+    else if (view === viewDias && livroAtual)             atualizarURL(livroAtual.id, null);
+    else if (view === viewConteudo && livroAtual && diaAtual) atualizarURL(livroAtual.id, diaAtual.dia);
   }
 
   /* ─── VIEW: Livros ────────────────────────────────────── */
@@ -542,6 +570,33 @@ const dadosLivros = JSON.stringify(livros);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   });
 
+  /* ─── Compartilhar ───────────────────────────────────── */
+  document.getElementById('btn-compartilhar').addEventListener('click', () => {
+    navigator.clipboard.writeText(window.location.href).then(() => {
+      const label = document.getElementById('btn-compartilhar-label');
+      label.textContent = 'Link copiado!';
+      setTimeout(() => { label.textContent = 'Copiar link do dia'; }, 2000);
+    });
+  });
+
   /* ─── Init ────────────────────────────────────────────── */
-  renderLivros();
+  const params    = new URLSearchParams(window.location.search);
+  const livroParam = params.get('livro');
+  const diaParam   = params.get('dia');
+
+  if (livroParam) livroAtual = livros.find(l => l.id === livroParam) || null;
+  if (livroAtual && diaParam) {
+    const diaNum = parseInt(diaParam, 10);
+    diaAtual = livroAtual.dias.find(d => d.dia === diaNum && d.disponivel !== false) || null;
+  }
+
+  if (diaAtual) {
+    renderConteudo();
+    mostrarView(viewConteudo);
+  } else if (livroAtual) {
+    renderDias();
+    mostrarView(viewDias);
+  } else {
+    renderLivros();
+  }
 </script>
