@@ -257,6 +257,26 @@ const dadosLivros = JSON.stringify(livros);
   /* ─── Cards de dia ──────────────────────────────────────── */
   .prose-custom p { color: var(--lp-prose); line-height: 1.8; }
 
+  /* ─── Marcador de leitura ───────────────────────────────── */
+  .lp-word {
+    cursor: pointer;
+    border-radius: 2px;
+    transition: background-color 0.1s;
+  }
+  .lp-word:hover {
+    background-color: var(--lp-accent-soft);
+  }
+  .lp-word-lido {
+    text-decoration: underline;
+    text-decoration-color: var(--lp-accent);
+    text-underline-offset: 4px;
+    text-decoration-thickness: 1.5px;
+    opacity: 0.6;
+  }
+  .lp-word-lido:hover {
+    opacity: 0.85;
+  }
+
   .card-dia {
     aspect-ratio: 1;
     display: flex;
@@ -323,6 +343,7 @@ const dadosLivros = JSON.stringify(livros);
   const livros = JSON.parse(dadosLivros);
   const STORAGE_KEY   = 'leitura-progresso';
   const TEMA_KEY      = 'leitura-tema';
+  const POS_KEY       = 'leitura-posicao';
   const root          = document.getElementById('leitura-root');
 
   /* ─── Tema ────────────────────────────────────────────── */
@@ -361,6 +382,52 @@ const dadosLivros = JSON.stringify(livros);
     salvarProgresso(p);
   }
   function getDiasLidos(livroId) { return getProgresso()[livroId] || []; }
+
+  /* ─── Posição de leitura ──────────────────────────────────── */
+  function getPosicaoLeitura(livroId, diaNum) {
+    try {
+      const pos = JSON.parse(localStorage.getItem(POS_KEY) || '{}');
+      const val = pos[livroId]?.[diaNum];
+      if (!val && val !== 0) return null;
+      // compatibilidade com formato antigo (número = índice de parágrafo)
+      if (typeof val === 'number') return { p: val, w: Infinity };
+      return val;
+    } catch { return null; }
+  }
+  function salvarPosicaoLeitura(livroId, diaNum, pos) {
+    try {
+      const data = JSON.parse(localStorage.getItem(POS_KEY) || '{}');
+      if (!data[livroId]) data[livroId] = {};
+      if (pos === null) delete data[livroId][diaNum];
+      else data[livroId][diaNum] = pos;
+      localStorage.setItem(POS_KEY, JSON.stringify(data));
+    } catch {}
+  }
+  function aplicarUnderline(pos) {
+    document.querySelectorAll('#dia-conteudo .lp-word').forEach(span => {
+      if (!pos) { span.classList.remove('lp-word-lido'); return; }
+      const sp = parseInt(span.dataset.para, 10);
+      const sw = parseInt(span.dataset.word, 10);
+      span.classList.toggle('lp-word-lido', sp < pos.p || (sp === pos.p && sw <= pos.w));
+    });
+  }
+  function inicializarUnderline() {
+    if (!livroAtual || !diaAtual) return;
+    document.querySelectorAll('#dia-conteudo .lp-word').forEach(span => {
+      span.addEventListener('click', e => {
+        e.stopPropagation();
+        const sp = parseInt(span.dataset.para, 10);
+        const sw = parseInt(span.dataset.word, 10);
+        const cur = getPosicaoLeitura(livroAtual.id, diaAtual.dia);
+        const isBoundary = cur && cur.p === sp && cur.w === sw;
+        const newPos = isBoundary ? null : { p: sp, w: sw };
+        aplicarUnderline(newPos);
+        salvarPosicaoLeitura(livroAtual.id, diaAtual.dia, newPos);
+      });
+    });
+    const saved = getPosicaoLeitura(livroAtual.id, diaAtual.dia);
+    if (saved) aplicarUnderline(saved);
+  }
 
   /* ─── State ───────────────────────────────────────────── */
   let livroAtual = null;
@@ -483,7 +550,12 @@ const dadosLivros = JSON.stringify(livros);
       vBloco.classList.add('hidden');
     }
 
-    document.getElementById('dia-conteudo').innerHTML = dia.conteudo.map(p => `<p>${p}</p>`).join('');
+    document.getElementById('dia-conteudo').innerHTML = dia.conteudo.map((texto, pi) => {
+      const palavras = texto.split(' ').map((w, wi) =>
+        `<span class="lp-word" data-para="${pi}" data-word="${wi}">${w}</span>`
+      ).join(' ');
+      return `<p data-para-idx="${pi}">${palavras}</p>`;
+    }).join('');
 
     const pBloco = document.getElementById('dia-pensamento-bloco');
     if (dia.pensamento) {
@@ -513,6 +585,8 @@ const dadosLivros = JSON.stringify(livros);
     atualizarBtnMarcar(document.getElementById('btn-marcar-lido'), isDiaLido(livroAtual.id, dia.dia));
     document.getElementById('btn-dia-anterior').disabled = dia.dia <= 1;
     document.getElementById('btn-proximo-dia').disabled  = dia.dia >= livroAtual.totalDias;
+
+    inicializarUnderline();
   }
 
   function atualizarBtnMarcar(btn, lido) {
