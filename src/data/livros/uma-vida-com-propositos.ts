@@ -519,11 +519,37 @@ const diasPreenchidos: DiaDeLeitura[] = [
     versiculoMemorizacaoRef: '2Coríntios 8.5, NTLH',
     perguntaParaMeditar: 'Meu nível de envolvimento em minha igreja local demonstra que amo e estou comprometido com a família de Deus?',
   },
+  {
+    dia: 19,
+    titulo: 'Cultivando a comunidade',
+    versiculo: 'Você poderá ter uma comunidade saudável, sólida, bem-sucedida e que Deus aprova somente se trabalhar duro para fortalecer os relacionamentos, tratando todos com dignidade e honra.',
+    versiculoRef: 'Tiago 3.18, AM',
+    conteudo: [
+      'Comunidade exige comprometimento. Somente o Espírito Santo pode criar uma verdadeira comunhão entre cristãos, mas ele cultiva isso por meio das escolhas feitas e dos compromissos que fazemos. Paulo faz referência a essa dupla responsabilidade: "Vocês estão unidos na paz por meio do Espírito, portanto esforcem-se para continuar unidos desse modo". É necessário tanto o poder de Deus quanto nosso esforço para gerar uma comunidade cristã amorosa.',
+      'Infelizmente, muitos crescem em famílias com relacionamentos adversos, por isso carecem das habilidades relacionais necessárias para experimentar a verdadeira comunhão. Eles devem ser ensinados a lidar e a se relacionar com os outros membros da família de Deus. Felizmente, o Novo Testamento é repleto de instruções sobre a vida em comunidade, como afirma o apóstolo Paulo: "Escrevo-lhe estas coisas [...] para que vocês saibam como viver na família de Deus. Essa família é a igreja".',
+      'A vida em comunidade exige sinceridade. Você deve cuidar para que a verdade seja dita (em amor, claro), mesmo quando se sentir tentado a ignorar o problema ou evitar o assunto. Embora seja muito mais fácil permanecer em silêncio enquanto os outros à nossa volta prejudicam a si mesmos e outros com alguma prática pecaminosa, essa não é uma atitude de amor. A comunhão é sabotada pelo medo: quando ninguém tem coragem de se manifestar enquanto a vida de um membro desmorona.',
+      'A Bíblia nos manda seguir a verdade em amor, porque não podemos viver em comunidade sem sinceridade. Salomão declara: "A resposta sincera é sinal de uma amizade verdadeira". Às vezes, isso significa importar-se o suficiente para repreender aquele que estiver em pecado ou sendo tentado a pecar. Paulo aconselha: "Irmãos e irmãs, se alguém em seu grupo comete algum erro, vocês que são espirituais deverão procurar essa pessoa e gentilmente ajudá-la a se corrigir".',
+      'Muitas comunidades e grupos mantêm um relacionamento superficial por recear os conflitos. Toda vez que uma questão delicada vem à tona, ela é imediatamente encoberta, a fim de preservar a falsa sensação de paz. O assunto nunca é resolvido, e todos vivem com uma frustração encoberta. Paulo é incisivo: "Nova vida traz mudanças: chega de mentiras, chega de fingimento. Falem a verdade. No corpo de Cristo, estamos, antes de tudo, conectados uns com os outros. Se você mente para alguém, está mentindo para você mesmo". A verdadeira comunhão depende da franqueza. Na verdade, o túnel do conflito é a travessia para a intimidade em qualquer relacionamento. Quando tratamos o conflito da maneira correta, crescemos em intimidade uns com os outros, pois enfrentamos e resolvemos nossas diferenças.',
+      'A franqueza, no entanto, não é uma licença para se dizer o que quer, onde quer e sempre que quiser. Não é grosseria. A Bíblia diz que "existe um tempo certo e um modo certo de fazer cada coisa". Palavras impensadas deixam feridas permanentes. Deus nos manda tratar os membros da igreja com o mesmo amor que dedicamos à família: "Nunca empregue palavras duras quando for corrigir um idoso, mas fale com ele como se fosse seu pai. Converse com os jovens como se fossem seus irmãos, com as mulheres idosas como se fossem sua mãe e com as jovens como se fossem suas irmãs".',
+      'Lamentavelmente, milhares de comunidades foram destruídas por falta de honestidade. Paulo precisou repreender a igreja de Corinto pelo seu silêncio passivo ao permitir a imoralidade no meio deles. Visto que ninguém teve coragem de enfrentar o problema, ele então se pronunciou: "Vocês não podem apenas ficar olhando e esperar que tudo se resolva. Tratem da questão e resolvam o problema, na autoridade de Jesus, nosso Senhor. Não sou responsável por aquilo que os de fora fazem, mas será que não temos nenhuma responsabilidade pelos que são da comunidade cristã?"',
+      'A vida em comunidade exige humildade. A presunção, o convencimento e o orgulho obstinado destroem a comunhão mais rápido que qualquer outra coisa. O orgulho ergue muros entre as pessoas; a humildade constrói pontes. A humildade é o unguento que acalma e suaviza os relacionamentos; por isso, a Bíblia diz: "Sejam todos humildes uns para com os outros". A vestimenta adequada à comunhão é a postura humilde.',
+      '"Deus se opõe aos orgulhosos, mas concede graça aos humildes". Essa é a outra razão pela qual precisamos ser humildes: o orgulho impede a graça de Deus em nossa vida, da qual precisamos para crescer, ser transformados, curados e ajudar os outros. Recebemos a graça de Deus quando admitimos humildemente que precisamos dela. De acordo com a Bíblia, se nos portamos com arrogância, vivemos em oposição a Deus!',
+      'Você pode desenvolver a humildade de várias maneiras práticas: admitindo suas fraquezas, sendo paciente com as fraquezas dos outros, estando aberto à admoestação e pondo os outros em evidência. Paulo orienta: "Vivam em harmonia entre vocês. Não se comportem como se fossem superiores a alguém, antes alegrem-se na companhia das pessoas comuns. E não pensem que já sabem tudo". Aos cristãos de Filipos, aconselha: "Nada façam por ambição egoísta ou por vaidade, mas humildemente considerem os outros superiores a vocês mesmos. Cada um cuide, não somente dos seus interesses, mas também dos interesses dos outros". Humildade não é pensar menos de si mesmo, mas pensar menos em si mesmo.',
+      'A vida em comunidade exige cortesia. Somos corteses quando respeitamos as diferenças, quando temos consideração pelos sentimentos uns dos outros e quando somos pacientes com os que nos irritam. A Bíblia diz: "É preciso carregar o peso de termos consideração para com as dúvidas e temores de outras pessoas". Em todo grupo, há pelo menos uma pessoa "difícil". Essas pessoas podem ter carências emocionais, insegurança profunda, manerismos irritantes e habilidades sociais escassas. Deus colocou essas pessoas em nosso meio tanto para benefício delas quanto nosso. Elas são uma oportunidade para crescermos e um teste para a comunhão. Será que conseguiremos amá-las como irmãos e irmãs, tratando-as com dignidade?',
+      'Em uma família de verdade, a aceitação não se baseia em critérios como inteligência, beleza ou talento de cada membro, mas no fato de pertencermos uns aos outros. A Bíblia diz: "Sejam dedicados uns aos outros como uma família afetuosa. Aprimorem-se em demonstrar respeito uns para com os outros". A verdade é que todos temos peculiaridades e traços de temperamento irritantes, mas a comunidade não depende de sermos todos compatíveis. O fundamento para termos comunhão é nosso relacionamento com Deus — somos uma família. Um elemento essencial para a cortesia é conhecer a origem das pessoas e não subestimar as dúvidas dos outros. A verdadeira comunidade é construída quando as pessoas sabem que é seguro compartilhar medos e dúvidas sem serem julgadas.',
+      'A vida em comunidade exige sigilo. Somente num ambiente seguro, onde existe acolhimento amável e sigiloso, as pessoas irão se abrir e compartilhar suas maiores mágoas, necessidades e seus erros. Sigilo não significa ficar em silêncio enquanto nosso irmão peca, mas saber que aquilo que for comentado no grupo ficará restrito ao grupo. Deus detesta a fofoca, principalmente quando maliciosamente disfarçada de "pedido de oração" em favor de alguém. Deus diz: "Os mexeriqueiros provocam discussões, e quem fala mal dos outros separa os maiores amigos". A fofoca sempre causa mágoa e discórdia, e isso destrói amizades.',
+      'A vida em comunidade exige constância. Você deve manter contato regular com seu grupo, a fim de desenvolver a verdadeira comunhão. Relacionamentos exigem tempo. A Bíblia diz: "Não abandonemos, como alguns estão fazendo, o costume de assistir às nossas reuniões. Pelo contrário, animemos uns aos outros". É preciso passar tempo com as pessoas — muito tempo — para estabelecer relacionamentos íntimos. A comunhão não é formada de acordo com nossa conveniência, mas na convicção de que é necessária para a nossa saúde espiritual. Os primeiros cristãos reuniam-se todos os dias: "Todos os dias eles adoravam juntos no templo, reuniam-se nas casas para o partir do pão e participavam das suas refeições com grande alegria e gratidão". Viver em comunhão requer investimento de tempo.',
+      'Se você é membro de um pequeno grupo ou de uma classe de escola dominical, recomendo que se faça um pacto entre todos no qual estejam incluídas as nove características da comunhão bíblica: "Compartilharemos nossos verdadeiros sentimentos (autenticidade), incentivaremos uns aos outros (reciprocidade), apoiaremos uns aos outros (compaixão), perdoaremos uns aos outros (misericórdia), falaremos a verdade uns com amor (sinceridade), admitiremos nossas fraquezas (humildade), respeitaremos nossas diferenças (cortesia), não divulgaremos segredos alheios que nos são ditos em confiança (sigilo) e faremos do grupo uma prioridade (constância)".',
+      'Quando você olha a lista de características, fica evidente o motivo pelo qual comunhão de verdade é algo tão raro. Ter comunhão significa desistir de nosso individualismo e independência para nos tornarmos interdependentes. Os benefícios de compartilhar a vida uns com os outros, no entanto, são plenamente compensadores e nos preparam para o céu.',
+    ],
+    pensamento: 'Comunidade exige comprometimento.',
+    versiculoMemorizacao: 'Nós compreendemos o que é o amor quando descobrimos que Cristo deu sua vida por nós. Isso significa que temos de dar a nossa vida pelos outros fiéis.',
+    versiculoMemorizacaoRef: '1João 3.16, GWT',
+    perguntaParaMeditar: 'Como eu poderia hoje ajudar meu grupo e minha igreja a desenvolver as características de uma comunidade verdadeira?',
+  },
 ];
 
-const diasVazios: DiaDeLeitura[] = Array.from({ length: 23 }, (_, i) => ({
-  dia: i + 18,
-  titulo: `Dia ${i + 11} — Em breve`,
+const vazioBase = {
   versiculo: '',
   versiculoRef: '',
   conteudo: ['Conteúdo deste dia ainda não foi adicionado.'],
@@ -531,8 +557,17 @@ const diasVazios: DiaDeLeitura[] = Array.from({ length: 23 }, (_, i) => ({
   versiculoMemorizacao: '',
   versiculoMemorizacaoRef: '',
   perguntaParaMeditar: '',
-  disponivel: false,
-}));
+  disponivel: false as const,
+};
+
+const diasVazios: DiaDeLeitura[] = [
+  { dia: 18, titulo: 'Dia 18 — Em breve', ...vazioBase },
+  ...Array.from({ length: 21 }, (_, i) => ({
+    dia: i + 20,
+    titulo: `Dia ${i + 20} — Em breve`,
+    ...vazioBase,
+  })),
+];
 
 export const umaVidaComPropositos: Livro = {
   id: 'uma-vida-com-propositos',
