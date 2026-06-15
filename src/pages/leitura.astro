@@ -1,474 +1,946 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
-import { livros } from '../data/livros/uma-vida-com-propositos';
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { livros } from "../data/livros/uma-vida-com-propositos";
 
 const dadosLivros = JSON.stringify(livros);
 ---
 
 <BaseLayout
-  title="Leitura — Uma Vida com Propósitos"
-  description="Acompanhe o desafio de 40 dias do livro Uma Vida com Propósitos de Rick Warren."
+	title="Leitura — Uma Vida com Propósitos"
+	description="Acompanhe o desafio de 40 dias do livro Uma Vida com Propósitos de Rick Warren."
 >
-  <div id="leitura-root" class="min-h-screen font-sans lp-root">
+	<div id="leitura-root" class="min-h-screen font-sans lp-root">
+		<!-- Header -->
+		<header class="lp-header fixed top-0 left-0 right-0 z-50 backdrop-blur-sm">
+			<div class="max-w-4xl mx-auto px-4 h-14 flex items-center justify-end">
+				<button
+					id="btn-tema"
+					class="lp-tema-btn w-9 h-9 rounded-lg flex items-center justify-center transition-all"
+					title="Alternar tema"
+					aria-label="Alternar entre modo claro e escuro"
+				>
+					<!-- Ícone sol (light mode) -->
+					<svg
+						id="icon-sol"
+						xmlns="http://www.w3.org/2000/svg"
+						width="18"
+						height="18"
+						viewBox="0 0 256 256"
+						fill="currentColor"
+						class="hidden"
+					>
+						<path
+							d="M120,40V16a8,8,0,0,1,16,0V40a8,8,0,0,1-16,0Zm72,88a64,64,0,1,1-64-64A64.07,64.07,0,0,1,192,128Zm-16,0a48,48,0,1,0-48,48A48.05,48.05,0,0,0,176,128ZM58.34,69.66A8,8,0,0,0,69.66,58.34l-16-16A8,8,0,0,0,42.34,53.66Zm0,116.68-16,16a8,8,0,0,0,11.32,11.32l16-16a8,8,0,0,0-11.32-11.32ZM192,72a8,8,0,0,0,5.66-2.34l16-16a8,8,0,0,0-11.32-11.32l-16,16A8,8,0,0,0,192,72Zm5.66,114.34a8,8,0,0,0-11.32,11.32l16,16a8,8,0,0,0,11.32-11.32ZM48,128a8,8,0,0,0-8-8H16a8,8,0,0,0,0,16H40A8,8,0,0,0,48,128Zm80,80a8,8,0,0,0-8,8v24a8,8,0,0,0,16,0V216A8,8,0,0,0,128,208Zm112-88H216a8,8,0,0,0,0,16h24a8,8,0,0,0,0-16Z"
+						></path>
+					</svg>
+					<!-- Ícone lua (dark mode) -->
+					<svg
+						id="icon-lua"
+						xmlns="http://www.w3.org/2000/svg"
+						width="18"
+						height="18"
+						viewBox="0 0 256 256"
+						fill="currentColor"
+					>
+						<path
+							d="M233.54,142.23a8,8,0,0,0-8-2,88.08,88.08,0,0,1-109.8-109.8,8,8,0,0,0-10-10,104.84,104.84,0,0,0-52.91,37A104,104,0,0,0,136,224a103.09,103.09,0,0,0,62.52-20.88,104.84,104.84,0,0,0,37-52.91A8,8,0,0,0,233.54,142.23Z"
+						></path>
+					</svg>
+				</button>
+			</div>
+		</header>
 
-    <!-- Header -->
-    <header class="lp-header fixed top-0 left-0 right-0 z-50 backdrop-blur-sm">
-      <div class="max-w-4xl mx-auto px-4 h-14 flex items-center justify-end">
-        <button
-          id="btn-tema"
-          class="lp-tema-btn w-9 h-9 rounded-lg flex items-center justify-center transition-all"
-          title="Alternar tema"
-          aria-label="Alternar entre modo claro e escuro"
-        >
-          <!-- Ícone sol (light mode) -->
-          <svg id="icon-sol" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 256 256" fill="currentColor" class="hidden">
-            <path d="M120,40V16a8,8,0,0,1,16,0V40a8,8,0,0,1-16,0Zm72,88a64,64,0,1,1-64-64A64.07,64.07,0,0,1,192,128Zm-16,0a48,48,0,1,0-48,48A48.05,48.05,0,0,0,176,128ZM58.34,69.66A8,8,0,0,0,69.66,58.34l-16-16A8,8,0,0,0,42.34,53.66Zm0,116.68-16,16a8,8,0,0,0,11.32,11.32l16-16a8,8,0,0,0-11.32-11.32ZM192,72a8,8,0,0,0,5.66-2.34l16-16a8,8,0,0,0-11.32-11.32l-16,16A8,8,0,0,0,192,72Zm5.66,114.34a8,8,0,0,0-11.32,11.32l16,16a8,8,0,0,0,11.32-11.32ZM48,128a8,8,0,0,0-8-8H16a8,8,0,0,0,0,16H40A8,8,0,0,0,48,128Zm80,80a8,8,0,0,0-8,8v24a8,8,0,0,0,16,0V216A8,8,0,0,0,128,208Zm112-88H216a8,8,0,0,0,0,16h24a8,8,0,0,0,0-16Z"/>
-          </svg>
-          <!-- Ícone lua (dark mode) -->
-          <svg id="icon-lua" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 256 256" fill="currentColor">
-            <path d="M233.54,142.23a8,8,0,0,0-8-2,88.08,88.08,0,0,1-109.8-109.8,8,8,0,0,0-10-10,104.84,104.84,0,0,0-52.91,37A104,104,0,0,0,136,224a103.09,103.09,0,0,0,62.52-20.88,104.84,104.84,0,0,0,37-52.91A8,8,0,0,0,233.54,142.23Z"/>
-          </svg>
-        </button>
-      </div>
-    </header>
+		<main class="pt-14 pb-16">
+			<!-- VIEW: Seleção de Livro -->
+			<div id="view-livros" class="max-w-4xl mx-auto px-4 py-12">
+				<div class="mb-10">
+					<h1 class="text-3xl font-bold lp-text-primary mb-2">Minha Leitura</h1>
+					<p class="lp-text-muted">
+						Selecione um livro para começar ou continuar sua leitura.
+					</p>
+				</div>
+				<div id="lista-livros" class="grid gap-4 sm:grid-cols-2"></div>
+			</div>
 
-    <main class="pt-14 pb-16">
+			<!-- VIEW: Grade de Dias -->
+			<div id="view-dias" class="max-w-4xl mx-auto px-4 py-12 hidden">
+				<button
+					id="btn-voltar-livros"
+					class="lp-link mb-8 text-sm flex items-center gap-2 transition-colors"
+				>
+					<svg
+						xmlns="http://www.w3.org/2000/svg"
+						width="14"
+						height="14"
+						viewBox="0 0 256 256"
+						fill="currentColor"
+					>
+						<path
+							d="M224,128a8,8,0,0,1-8,8H59.31l58.35,58.34a8,8,0,0,1-11.32,11.32l-72-72a8,8,0,0,1,0-11.32l72-72a8,8,0,0,1,11.32,11.32L59.31,120H216A8,8,0,0,1,224,128Z"
+						></path>
+					</svg>
+					Trocar livro
+				</button>
 
-      <!-- VIEW: Seleção de Livro -->
-      <div id="view-livros" class="max-w-4xl mx-auto px-4 py-12">
-        <div class="mb-10">
-          <h1 class="text-3xl font-bold lp-text-primary mb-2">Minha Leitura</h1>
-          <p class="lp-text-muted">Selecione um livro para começar ou continuar sua leitura.</p>
-        </div>
-        <div id="lista-livros" class="grid gap-4 sm:grid-cols-2"></div>
-      </div>
+				<div class="mb-8 flex items-start justify-between flex-wrap gap-4">
+					<div>
+						<h2
+							id="livro-titulo"
+							class="text-2xl font-bold lp-text-primary mb-1"
+						>
+						</h2>
+						<p id="livro-autor" class="lp-text-accent text-sm font-medium"></p>
+					</div>
+					<div class="text-right">
+						<div id="progresso-texto" class="text-sm lp-text-muted mb-1"></div>
+						<div
+							class="w-48 h-1.5 lp-progress-track rounded-full overflow-hidden"
+						>
+							<div
+								id="progresso-barra"
+								class="h-full lp-accent-bg rounded-full transition-all duration-500"
+								style="width: 0%"
+							>
+							</div>
+						</div>
+					</div>
+				</div>
 
-      <!-- VIEW: Grade de Dias -->
-      <div id="view-dias" class="max-w-4xl mx-auto px-4 py-12 hidden">
-        <button id="btn-voltar-livros" class="lp-link mb-8 text-sm flex items-center gap-2 transition-colors">
-          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 256 256" fill="currentColor">
-            <path d="M224,128a8,8,0,0,1-8,8H59.31l58.35,58.34a8,8,0,0,1-11.32,11.32l-72-72a8,8,0,0,1,0-11.32l72-72a8,8,0,0,1,11.32,11.32L59.31,120H216A8,8,0,0,1,224,128Z"/>
-          </svg>
-          Trocar livro
-        </button>
+				<div id="grade-dias" class="grid grid-cols-5 sm:grid-cols-8 gap-2">
+				</div>
+			</div>
 
-        <div class="mb-8 flex items-start justify-between flex-wrap gap-4">
-          <div>
-            <h2 id="livro-titulo" class="text-2xl font-bold lp-text-primary mb-1"></h2>
-            <p id="livro-autor" class="lp-text-accent text-sm font-medium"></p>
-          </div>
-          <div class="text-right">
-            <div id="progresso-texto" class="text-sm lp-text-muted mb-1"></div>
-            <div class="w-48 h-1.5 lp-progress-track rounded-full overflow-hidden">
-              <div id="progresso-barra" class="h-full lp-accent-bg rounded-full transition-all duration-500" style="width: 0%"></div>
-            </div>
-          </div>
-        </div>
+			<!-- VIEW: Conteúdo do Dia -->
+			<div id="view-conteudo" class="hidden">
+				<div class="max-w-2xl mx-auto px-4 py-10">
+					<button
+						id="btn-voltar-dias"
+						class="lp-link mb-8 text-sm flex items-center gap-2 transition-colors"
+					>
+						<svg
+							xmlns="http://www.w3.org/2000/svg"
+							width="14"
+							height="14"
+							viewBox="0 0 256 256"
+							fill="currentColor"
+						>
+							<path
+								d="M224,128a8,8,0,0,1-8,8H59.31l58.35,58.34a8,8,0,0,1-11.32,11.32l-72-72a8,8,0,0,1,0-11.32l72-72a8,8,0,0,1,11.32,11.32L59.31,120H216A8,8,0,0,1,224,128Z"
+							></path>
+						</svg>
+						Todos os dias
+					</button>
 
-        <div id="grade-dias" class="grid grid-cols-5 sm:grid-cols-8 gap-2"></div>
-      </div>
+					<div
+						class="mb-2 lp-text-accent text-xs font-semibold uppercase tracking-widest"
+						id="dia-numero"
+					>
+					</div>
+					<h2
+						id="dia-titulo"
+						class="text-2xl sm:text-3xl font-bold lp-text-primary mb-6 leading-tight"
+					>
+					</h2>
 
-      <!-- VIEW: Conteúdo do Dia -->
-      <div id="view-conteudo" class="hidden">
-        <div class="max-w-2xl mx-auto px-4 py-10">
-          <button id="btn-voltar-dias" class="lp-link mb-8 text-sm flex items-center gap-2 transition-colors">
-            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 256 256" fill="currentColor">
-              <path d="M224,128a8,8,0,0,1-8,8H59.31l58.35,58.34a8,8,0,0,1-11.32,11.32l-72-72a8,8,0,0,1,0-11.32l72-72a8,8,0,0,1,11.32,11.32L59.31,120H216A8,8,0,0,1,224,128Z"/>
-            </svg>
-            Todos os dias
-          </button>
+					<!-- Versículo de abertura -->
+					<blockquote
+						id="dia-versiculo-bloco"
+						class="mb-8 border-l-2 lp-quote-border pl-4 hidden"
+					>
+						<p id="dia-versiculo" class="lp-text-verse italic leading-relaxed">
+						</p>
+						<footer
+							id="dia-versiculo-ref"
+							class="mt-2 lp-text-accent text-sm font-medium"
+						>
+						</footer>
+					</blockquote>
 
-          <div class="mb-2 lp-text-accent text-xs font-semibold uppercase tracking-widest" id="dia-numero"></div>
-          <h2 id="dia-titulo" class="text-2xl sm:text-3xl font-bold lp-text-primary mb-6 leading-tight"></h2>
+					<!-- Conteúdo -->
+					<div id="dia-conteudo" class="prose-custom space-y-4 mb-10"></div>
 
-          <!-- Versículo de abertura -->
-          <blockquote id="dia-versiculo-bloco" class="mb-8 border-l-2 lp-quote-border pl-4 hidden">
-            <p id="dia-versiculo" class="lp-text-verse italic leading-relaxed"></p>
-            <footer id="dia-versiculo-ref" class="mt-2 lp-text-accent text-sm font-medium"></footer>
-          </blockquote>
+					<!-- Pense nisso -->
+					<div
+						id="dia-pensamento-bloco"
+						class="hidden mb-8 lp-block-surface rounded-xl p-5"
+					>
+						<div
+							class="text-xs font-semibold uppercase tracking-widest lp-text-accent mb-2"
+						>
+							Pense nisso
+						</div>
+						<p id="dia-pensamento" class="lp-text-secondary leading-relaxed">
+						</p>
+					</div>
 
-          <!-- Conteúdo -->
-          <div id="dia-conteudo" class="prose-custom space-y-4 mb-10"></div>
+					<!-- Versículo para memorizar -->
+					<div
+						id="dia-mem-bloco"
+						class="hidden mb-10 lp-block-mem rounded-xl p-5"
+					>
+						<div
+							class="text-xs font-semibold uppercase tracking-widest lp-text-accent mb-2"
+						>
+							Versículo para memorizar
+						</div>
+						<p
+							id="dia-mem-versiculo"
+							class="lp-text-secondary italic leading-relaxed mb-1"
+						>
+						</p>
+						<p id="dia-mem-ref" class="lp-text-accent text-sm font-medium"></p>
+					</div>
 
-          <!-- Pense nisso -->
-          <div id="dia-pensamento-bloco" class="hidden mb-8 lp-block-surface rounded-xl p-5">
-            <div class="text-xs font-semibold uppercase tracking-widest lp-text-accent mb-2">Pense nisso</div>
-            <p id="dia-pensamento" class="lp-text-secondary leading-relaxed"></p>
-          </div>
+					<!-- Pergunta -->
+					<div
+						id="dia-pergunta-bloco"
+						class="hidden mb-10 lp-block-pergunta rounded-xl p-5"
+					>
+						<div
+							class="text-xs font-semibold uppercase tracking-widest lp-text-accent mb-2"
+						>
+							Pergunta para meditar
+						</div>
+						<p id="dia-pergunta" class="lp-text-secondary leading-relaxed"></p>
+					</div>
 
-          <!-- Versículo para memorizar -->
-          <div id="dia-mem-bloco" class="hidden mb-10 lp-block-mem rounded-xl p-5">
-            <div class="text-xs font-semibold uppercase tracking-widest lp-text-accent mb-2">Versículo para memorizar</div>
-            <p id="dia-mem-versiculo" class="lp-text-secondary italic leading-relaxed mb-1"></p>
-            <p id="dia-mem-ref" class="lp-text-accent text-sm font-medium"></p>
-          </div>
+					<!-- Ações -->
+					<div
+						class="flex items-center justify-between gap-4 pt-6 lp-divider border-t"
+					>
+						<button
+							id="btn-dia-anterior"
+							class="lp-nav-btn text-sm flex items-center gap-2 transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
+						>
+							<svg
+								xmlns="http://www.w3.org/2000/svg"
+								width="14"
+								height="14"
+								viewBox="0 0 256 256"
+								fill="currentColor"
+							>
+								<path
+									d="M224,128a8,8,0,0,1-8,8H59.31l58.35,58.34a8,8,0,0,1-11.32,11.32l-72-72a8,8,0,0,1,0-11.32l72-72a8,8,0,0,1,11.32,11.32L59.31,120H216A8,8,0,0,1,224,128Z"
+								></path>
+							</svg>
+							Dia anterior
+						</button>
 
-          <!-- Pergunta -->
-          <div id="dia-pergunta-bloco" class="hidden mb-10 lp-block-pergunta rounded-xl p-5">
-            <div class="text-xs font-semibold uppercase tracking-widest lp-text-accent mb-2">Pergunta para meditar</div>
-            <p id="dia-pergunta" class="lp-text-secondary leading-relaxed"></p>
-          </div>
+						<button
+							id="btn-marcar-lido"
+							class="px-5 py-2.5 rounded-lg text-sm font-semibold transition-all duration-200"
+						></button>
 
-          <!-- Ações -->
-          <div class="flex items-center justify-between gap-4 pt-6 lp-divider border-t">
-            <button id="btn-dia-anterior" class="lp-nav-btn text-sm flex items-center gap-2 transition-colors disabled:opacity-30 disabled:cursor-not-allowed">
-              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 256 256" fill="currentColor">
-                <path d="M224,128a8,8,0,0,1-8,8H59.31l58.35,58.34a8,8,0,0,1-11.32,11.32l-72-72a8,8,0,0,1,0-11.32l72-72a8,8,0,0,1,11.32,11.32L59.31,120H216A8,8,0,0,1,224,128Z"/>
-              </svg>
-              Dia anterior
-            </button>
+						<button
+							id="btn-proximo-dia"
+							class="lp-nav-btn text-sm flex items-center gap-2 transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
+						>
+							Próximo dia
+							<svg
+								xmlns="http://www.w3.org/2000/svg"
+								width="14"
+								height="14"
+								viewBox="0 0 256 256"
+								fill="currentColor"
+							>
+								<path
+									d="M40,128a8,8,0,0,1,8-8H196.69L138.34,61.66a8,8,0,0,1,11.32-11.32l72,72a8,8,0,0,1,0,11.32l-72,72a8,8,0,0,1-11.32-11.32L196.69,136H48A8,8,0,0,1,40,128Z"
+								></path>
+							</svg>
+						</button>
+					</div>
 
-            <button id="btn-marcar-lido" class="px-5 py-2.5 rounded-lg text-sm font-semibold transition-all duration-200"></button>
+					<!-- Compartilhar -->
+					<div class="flex justify-center mt-6">
+						<button
+							id="btn-compartilhar"
+							class="lp-share-btn text-xs flex items-center gap-1.5 px-3 py-1.5 rounded-lg transition-all"
+						>
+							<svg
+								xmlns="http://www.w3.org/2000/svg"
+								width="13"
+								height="13"
+								viewBox="0 0 256 256"
+								fill="currentColor"
+							>
+								<path
+									d="M229.66,109.66l-48,48a8,8,0,0,1-11.32-11.32L204.69,112H165a88.21,88.21,0,0,0-75.06,42.34,8,8,0,0,1-13.69-8.3A104.27,104.27,0,0,1,165,96h39.69L170.34,61.66a8,8,0,0,1,11.32-11.32l48,48A8,8,0,0,1,229.66,109.66ZM192,208H40V88a8,8,0,0,0-16,0V208a16,16,0,0,0,16,16H192a8,8,0,0,0,0-16Z"
+								></path>
+							</svg>
+							<span id="btn-compartilhar-label">Copiar link do dia</span>
+						</button>
+					</div>
+				</div>
 
-            <button id="btn-proximo-dia" class="lp-nav-btn text-sm flex items-center gap-2 transition-colors disabled:opacity-30 disabled:cursor-not-allowed">
-              Próximo dia
-              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 256 256" fill="currentColor">
-                <path d="M40,128a8,8,0,0,1,8-8H196.69L138.34,61.66a8,8,0,0,1,11.32-11.32l72,72a8,8,0,0,1,0,11.32l-72,72a8,8,0,0,1-11.32-11.32L196.69,136H48A8,8,0,0,1,40,128Z"/>
-              </svg>
-            </button>
-          </div>
+				<!-- Dica do marcador de texto -->
+				<div id="lp-marcador-hint" class="lp-marcador-hint hidden">
+					Toque na palavra inicial e depois na final para marcar um trecho.
+					Toque em um trecho marcado para remover.
+				</div>
 
-          <!-- Compartilhar -->
-          <div class="flex justify-center mt-6">
-            <button id="btn-compartilhar" class="lp-share-btn text-xs flex items-center gap-1.5 px-3 py-1.5 rounded-lg transition-all">
-              <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 256 256" fill="currentColor">
-                <path d="M229.66,109.66l-48,48a8,8,0,0,1-11.32-11.32L204.69,112H165a88.21,88.21,0,0,0-75.06,42.34,8,8,0,0,1-13.69-8.3A104.27,104.27,0,0,1,165,96h39.69L170.34,61.66a8,8,0,0,1,11.32-11.32l48,48A8,8,0,0,1,229.66,109.66ZM192,208H40V88a8,8,0,0,0-16,0V208a16,16,0,0,0,16,16H192a8,8,0,0,0,0-16Z"/>
-              </svg>
-              <span id="btn-compartilhar-label">Copiar link do dia</span>
-            </button>
-          </div>
-        </div>
-      </div>
-
-    </main>
-  </div>
+				<!-- Barra flutuante de ferramentas -->
+				<div
+					class="lp-toolbar fixed bottom-6 right-6 z-40 flex flex-col items-center gap-1 rounded-full p-1"
+				>
+					<button
+						id="btn-modo-lido"
+						class="lp-toolbar-btn"
+						title="Marcar como lido"
+						aria-label="Ferramenta: marcar como lido"
+					>
+						<svg
+							xmlns="http://www.w3.org/2000/svg"
+							width="18"
+							height="18"
+							viewBox="0 0 24 24"
+							fill="currentColor"
+						>
+							<path
+								d="M6 3v8a6 6 0 0012 0V3h-2v8a4 4 0 01-8 0V3H6zM4 20h16v2H4v-2z"
+							></path>
+						</svg>
+					</button>
+					<button
+						id="btn-modo-marcador"
+						class="lp-toolbar-btn"
+						title="Marcador de texto"
+						aria-label="Ferramenta: marcador de texto"
+					>
+						<svg
+							xmlns="http://www.w3.org/2000/svg"
+							width="18"
+							height="18"
+							viewBox="0 0 24 24"
+							fill="currentColor"
+						>
+							<path
+								d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04a1 1 0 000-1.41l-2.34-2.34a1 1 0 00-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"
+							></path>
+						</svg>
+					</button>
+				</div>
+			</div>
+		</main>
+	</div>
 </BaseLayout>
 
 <style is:global>
-  /* ─── Variáveis de tema ─────────────────────────────────── */
-  #leitura-root {
-    --lp-bg:             #121212;
-    --lp-header-bg:      rgba(18, 18, 18, 0.88);
-    --lp-header-border:  rgba(255,255,255,0.07);
-    --lp-surface:        #1e1e1e;
-    --lp-surface-hover:  #252525;
-    --lp-border:         rgba(255,255,255,0.08);
-    --lp-border-card:    rgba(255,255,255,0.18);
-    --lp-text:           #e0e0e0;
-    --lp-text-secondary: #c8c8c8;
-    --lp-text-muted:     #9ca3af;
-    --lp-text-subtle:    #6b7280;
-    --lp-accent:         #6366f1;
-    --lp-accent-soft:    rgba(99,102,241,0.18);
-    --lp-accent-border:  rgba(99,102,241,0.35);
-    --lp-prose:          #c8c8c8;
-    --lp-surface-2:      rgba(30,30,30,0.7);
-    --lp-border-2:       rgba(255,255,255,0.06);
-    --lp-mem-bg:         rgba(49,46,129,0.22);
-    --lp-mem-border:     rgba(99,102,241,0.2);
-    --lp-pergunta-bg:    rgba(30,30,30,0.5);
-    --lp-pergunta-border:rgba(255,255,255,0.06);
-    --lp-day-empty:      #0f172a;
-    --lp-day-empty-bd:   #1e293b;
-    --lp-day-empty-text: #475569;
-    --lp-progress-track: rgba(255,255,255,0.08);
-    --lp-tema-btn-bg:    rgba(255,255,255,0.06);
-    --lp-tema-btn-hover: rgba(255,255,255,0.12);
-  }
+	/* ─── Variáveis de tema ─────────────────────────────────── */
+	#leitura-root {
+		--lp-bg: #121212;
+		--lp-header-bg: rgba(18, 18, 18, 0.88);
+		--lp-header-border: rgba(255, 255, 255, 0.07);
+		--lp-surface: #1e1e1e;
+		--lp-surface-hover: #252525;
+		--lp-border: rgba(255, 255, 255, 0.08);
+		--lp-border-card: rgba(255, 255, 255, 0.18);
+		--lp-text: #e0e0e0;
+		--lp-text-secondary: #c8c8c8;
+		--lp-text-muted: #9ca3af;
+		--lp-text-subtle: #6b7280;
+		--lp-accent: #6366f1;
+		--lp-accent-soft: rgba(99, 102, 241, 0.18);
+		--lp-accent-border: rgba(99, 102, 241, 0.35);
+		--lp-prose: #c8c8c8;
+		--lp-surface-2: rgba(30, 30, 30, 0.7);
+		--lp-border-2: rgba(255, 255, 255, 0.06);
+		--lp-mem-bg: rgba(49, 46, 129, 0.22);
+		--lp-mem-border: rgba(99, 102, 241, 0.2);
+		--lp-pergunta-bg: rgba(30, 30, 30, 0.5);
+		--lp-pergunta-border: rgba(255, 255, 255, 0.06);
+		--lp-day-empty: #0f172a;
+		--lp-day-empty-bd: #1e293b;
+		--lp-day-empty-text: #475569;
+		--lp-progress-track: rgba(255, 255, 255, 0.08);
+		--lp-tema-btn-bg: rgba(255, 255, 255, 0.06);
+		--lp-tema-btn-hover: rgba(255, 255, 255, 0.12);
+		--lp-highlight-bg: rgba(255, 204, 0, 0.3);
+	}
 
-  #leitura-root.light {
-    --lp-bg:             #f5f5f5;
-    --lp-header-bg:      rgba(245,245,245,0.92);
-    --lp-header-border:  rgba(0,0,0,0.09);
-    --lp-surface:        #ffffff;
-    --lp-surface-hover:  #f9f9f9;
-    --lp-border:         rgba(0,0,0,0.1);
-    --lp-border-card:    rgba(0,0,0,0.18);
-    --lp-text:           #1a1a1a;
-    --lp-text-secondary: #2d2d2d;
-    --lp-text-muted:     #6b7280;
-    --lp-text-subtle:    #9ca3af;
-    --lp-accent:         #4f46e5;
-    --lp-accent-soft:    rgba(79,70,229,0.12);
-    --lp-accent-border:  rgba(79,70,229,0.3);
-    --lp-prose:          #374151;
-    --lp-surface-2:      rgba(255,255,255,0.85);
-    --lp-border-2:       rgba(0,0,0,0.08);
-    --lp-mem-bg:         rgba(238,242,255,0.8);
-    --lp-mem-border:     rgba(99,102,241,0.2);
-    --lp-pergunta-bg:    rgba(255,255,255,0.7);
-    --lp-pergunta-border:rgba(0,0,0,0.08);
-    --lp-day-empty:      #ebebeb;
-    --lp-day-empty-bd:   #d8d8d8;
-    --lp-day-empty-text: #adb5bd;
-    --lp-progress-track: rgba(0,0,0,0.1);
-    --lp-tema-btn-bg:    rgba(0,0,0,0.06);
-    --lp-tema-btn-hover: rgba(0,0,0,0.1);
-  }
+	#leitura-root.light {
+		--lp-bg: #f5f5f5;
+		--lp-header-bg: rgba(245, 245, 245, 0.92);
+		--lp-header-border: rgba(0, 0, 0, 0.09);
+		--lp-surface: #ffffff;
+		--lp-surface-hover: #f9f9f9;
+		--lp-border: rgba(0, 0, 0, 0.1);
+		--lp-border-card: rgba(0, 0, 0, 0.18);
+		--lp-text: #1a1a1a;
+		--lp-text-secondary: #2d2d2d;
+		--lp-text-muted: #6b7280;
+		--lp-text-subtle: #9ca3af;
+		--lp-accent: #4f46e5;
+		--lp-accent-soft: rgba(79, 70, 229, 0.12);
+		--lp-accent-border: rgba(79, 70, 229, 0.3);
+		--lp-prose: #374151;
+		--lp-surface-2: rgba(255, 255, 255, 0.85);
+		--lp-border-2: rgba(0, 0, 0, 0.08);
+		--lp-mem-bg: rgba(238, 242, 255, 0.8);
+		--lp-mem-border: rgba(99, 102, 241, 0.2);
+		--lp-pergunta-bg: rgba(255, 255, 255, 0.7);
+		--lp-pergunta-border: rgba(0, 0, 0, 0.08);
+		--lp-day-empty: #ebebeb;
+		--lp-day-empty-bd: #d8d8d8;
+		--lp-day-empty-text: #adb5bd;
+		--lp-progress-track: rgba(0, 0, 0, 0.1);
+		--lp-tema-btn-bg: rgba(0, 0, 0, 0.06);
+		--lp-tema-btn-hover: rgba(0, 0, 0, 0.1);
+		--lp-highlight-bg: rgba(250, 204, 21, 0.5);
+	}
 
-  /* ─── Classes utilitárias de tema ──────────────────────── */
-  .lp-root        { background-color: var(--lp-bg); color: var(--lp-text); transition: background-color 0.2s, color 0.2s; }
-  .lp-header      { border-bottom: 1px solid var(--lp-header-border); background-color: var(--lp-header-bg); }
-  .lp-link        { color: var(--lp-text-muted); }
-  .lp-link:hover  { color: var(--lp-accent); }
-  .lp-text-primary   { color: var(--lp-text); }
-  .lp-text-secondary { color: var(--lp-text-secondary); }
-  .lp-text-muted     { color: var(--lp-text-muted); }
-  .lp-text-subtle    { color: var(--lp-text-subtle); }
-  .lp-text-accent    { color: var(--lp-accent); }
-  .lp-text-verse     { color: var(--lp-text-secondary); }
-  .lp-quote-border   { border-color: var(--lp-accent); }
-  .lp-progress-track { background-color: var(--lp-progress-track); }
-  .lp-accent-bg      { background-color: var(--lp-accent); }
-  .lp-block-surface  { background-color: var(--lp-surface-2); border: 1px solid var(--lp-border-2); }
-  .lp-block-mem      { background-color: var(--lp-mem-bg); border: 1px solid var(--lp-mem-border); }
-  .lp-block-pergunta { background-color: var(--lp-pergunta-bg); border: 1px solid var(--lp-pergunta-border); }
-  .lp-divider        { border-color: var(--lp-border); }
-  .lp-nav-btn        { color: var(--lp-text-muted); }
-  .lp-nav-btn:hover  { color: var(--lp-text); }
-  .lp-tema-btn { background-color: var(--lp-tema-btn-bg); color: var(--lp-text-muted); }
-  .lp-tema-btn:hover { background-color: var(--lp-tema-btn-hover); color: var(--lp-text); }
-  .lp-share-btn { background-color: var(--lp-tema-btn-bg); color: var(--lp-text-subtle); }
-  .lp-share-btn:hover { background-color: var(--lp-tema-btn-hover); color: var(--lp-text-muted); }
+	/* ─── Classes utilitárias de tema ──────────────────────── */
+	.lp-root {
+		background-color: var(--lp-bg);
+		color: var(--lp-text);
+		transition:
+			background-color 0.2s,
+			color 0.2s;
+	}
+	.lp-header {
+		border-bottom: 1px solid var(--lp-header-border);
+		background-color: var(--lp-header-bg);
+	}
+	.lp-link {
+		color: var(--lp-text-muted);
+	}
+	.lp-link:hover {
+		color: var(--lp-accent);
+	}
+	.lp-text-primary {
+		color: var(--lp-text);
+	}
+	.lp-text-secondary {
+		color: var(--lp-text-secondary);
+	}
+	.lp-text-muted {
+		color: var(--lp-text-muted);
+	}
+	.lp-text-subtle {
+		color: var(--lp-text-subtle);
+	}
+	.lp-text-accent {
+		color: var(--lp-accent);
+	}
+	.lp-text-verse {
+		color: var(--lp-text-secondary);
+	}
+	.lp-quote-border {
+		border-color: var(--lp-accent);
+	}
+	.lp-progress-track {
+		background-color: var(--lp-progress-track);
+	}
+	.lp-accent-bg {
+		background-color: var(--lp-accent);
+	}
+	.lp-block-surface {
+		background-color: var(--lp-surface-2);
+		border: 1px solid var(--lp-border-2);
+	}
+	.lp-block-mem {
+		background-color: var(--lp-mem-bg);
+		border: 1px solid var(--lp-mem-border);
+	}
+	.lp-block-pergunta {
+		background-color: var(--lp-pergunta-bg);
+		border: 1px solid var(--lp-pergunta-border);
+	}
+	.lp-divider {
+		border-color: var(--lp-border);
+	}
+	.lp-nav-btn {
+		color: var(--lp-text-muted);
+	}
+	.lp-nav-btn:hover {
+		color: var(--lp-text);
+	}
+	.lp-tema-btn {
+		background-color: var(--lp-tema-btn-bg);
+		color: var(--lp-text-muted);
+	}
+	.lp-tema-btn:hover {
+		background-color: var(--lp-tema-btn-hover);
+		color: var(--lp-text);
+	}
+	.lp-share-btn {
+		background-color: var(--lp-tema-btn-bg);
+		color: var(--lp-text-subtle);
+	}
+	.lp-share-btn:hover {
+		background-color: var(--lp-tema-btn-hover);
+		color: var(--lp-text-muted);
+	}
 
-  .lp-card {
-    text-align: left;
-    padding: 1.25rem;
-    border-radius: 0.75rem;
-    border: 1px solid var(--lp-border-card);
-    background-color: var(--lp-surface);
-    transition: border-color 0.15s, background-color 0.15s;
-    width: 100%;
-    cursor: pointer;
-  }
-  .lp-card:hover {
-    border-color: var(--lp-accent-border);
-    background-color: var(--lp-surface-hover);
-  }
-  .lp-card-icon {
-    width: 2.5rem; height: 2.5rem;
-    border-radius: 0.5rem;
-    background-color: var(--lp-accent-soft);
-    border: 1px solid var(--lp-accent-border);
-    display: flex; align-items: center; justify-content: center;
-    color: var(--lp-accent);
-  }
+	.lp-card {
+		text-align: left;
+		padding: 1.25rem;
+		border-radius: 0.75rem;
+		border: 1px solid var(--lp-border-card);
+		background-color: var(--lp-surface);
+		transition:
+			border-color 0.15s,
+			background-color 0.15s;
+		width: 100%;
+		cursor: pointer;
+	}
+	.lp-card:hover {
+		border-color: var(--lp-accent-border);
+		background-color: var(--lp-surface-hover);
+	}
+	.lp-card-icon {
+		width: 2.5rem;
+		height: 2.5rem;
+		border-radius: 0.5rem;
+		background-color: var(--lp-accent-soft);
+		border: 1px solid var(--lp-accent-border);
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		color: var(--lp-accent);
+	}
 
-  /* ─── Cards de dia ──────────────────────────────────────── */
-  .prose-custom p { color: var(--lp-prose); line-height: 1.8; }
+	/* ─── Cards de dia ──────────────────────────────────────── */
+	.prose-custom p {
+		color: var(--lp-prose);
+		line-height: 1.8;
+	}
 
-  /* ─── Marcador de leitura ───────────────────────────────── */
-  .lp-word {
-    cursor: pointer;
-    border-radius: 2px;
-    transition: background-color 0.1s;
-  }
-  .lp-word:hover {
-    background-color: var(--lp-accent-soft);
-  }
-  .lp-word-lido {
-    text-decoration: underline;
-    text-decoration-color: var(--lp-accent);
-    text-underline-offset: 4px;
-    text-decoration-thickness: 1.5px;
-    opacity: 0.6;
-  }
-  .lp-word-lido:hover {
-    opacity: 0.85;
-  }
+	/* ─── Marcador de leitura ───────────────────────────────── */
+	.lp-word {
+		cursor: pointer;
+		border-radius: 2px;
+		transition: background-color 0.1s;
+	}
+	.lp-word:hover {
+		background-color: var(--lp-accent-soft);
+	}
+	.lp-word-lido {
+		text-decoration: underline;
+		text-decoration-color: var(--lp-accent);
+		text-underline-offset: 4px;
+		text-decoration-thickness: 1.5px;
+		opacity: 0.6;
+	}
+	.lp-word-lido:hover {
+		opacity: 0.85;
+	}
+	.lp-word-marcado {
+		background-color: var(--lp-highlight-bg);
+		border-radius: 0px;
+	}
+	.lp-word-selecionando {
+		outline: 2px dashed var(--lp-accent);
+		outline-offset: 2px;
+		border-radius: 2px;
+	}
 
-  .card-dia {
-    aspect-ratio: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 0.5rem;
-    font-size: 0.8rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.15s ease;
-    border: 1px solid;
-    position: relative;
-  }
-  .card-dia:hover { transform: scale(1.06); }
+	/* ─── Barra flutuante de ferramentas ───────────────────── */
+	.lp-toolbar {
+		background-color: var(--lp-surface);
+		border: 1px solid var(--lp-border-card);
+		box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+		backdrop-filter: blur(12px);
+		-webkit-backdrop-filter: blur(12px);
+	}
+	.lp-toolbar-btn {
+		width: 2.5rem;
+		height: 2.5rem;
+		border-radius: 9999px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		color: var(--lp-text-muted);
+		transition: all 0.15s;
+	}
+	.lp-toolbar-btn:hover {
+		background-color: var(--lp-tema-btn-hover);
+		color: var(--lp-text);
+	}
+	.lp-toolbar-btn.active {
+		background-color: var(--lp-accent);
+		color: #fff;
+	}
+	.lp-marcador-hint {
+		position: fixed;
+		bottom: 8.5rem;
+		right: 1.5rem;
+		max-width: 220px;
+		font-size: 0.75rem;
+		line-height: 1.4;
+		text-align: right;
+		color: var(--lp-text-muted);
+		background-color: var(--lp-surface);
+		border: 1px solid var(--lp-border-card);
+		border-radius: 0.5rem;
+		padding: 0.5rem 0.75rem;
+		box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+		z-index: 49;
+	}
 
-  .card-dia.lido {
-    background-color: var(--lp-accent-soft);
-    border-color: var(--lp-accent-border);
-    color: var(--lp-accent);
-  }
-  .card-dia.lido::after {
-    content: '✓';
-    position: absolute;
-    top: 2px; right: 5px;
-    font-size: 0.55rem;
-    color: var(--lp-accent);
-  }
-  .card-dia.nao-lido {
-    background-color: var(--lp-surface);
-    border-color: var(--lp-border-card);
-    color: var(--lp-day-empty-text);
-  }
-  .card-dia.nao-lido:hover {
-    border-color: var(--lp-accent-border);
-    color: var(--lp-text-muted);
-  }
-  .card-dia.bloqueado {
-    background-color: var(--lp-day-empty);
-    border-color: var(--lp-day-empty-bd);
-    color: var(--lp-day-empty-text);
-    cursor: not-allowed;
-    opacity: 0.5;
-  }
-  .card-dia.bloqueado:hover {
-    transform: none;
-    border-color: var(--lp-day-empty-bd);
-    color: var(--lp-day-empty-text);
-  }
-  .card-dia.bloqueado .lock-icon {
-    position: absolute;
-    top: 3px;
-    right: 4px;
-    opacity: 0.5;
-  }
-  .card-dia.atual {
-    background-color: var(--lp-accent);
-    border-color: var(--lp-accent);
-    color: #fff;
-    box-shadow: 0 0 0 2px var(--lp-accent-soft);
-  }
+	.card-dia {
+		aspect-ratio: 1;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		border-radius: 0.5rem;
+		font-size: 1.5rem;
+		font-weight: 600;
+		cursor: pointer;
+		transition: all 0.15s ease;
+		border: 1px solid;
+		position: relative;
+	}
+	.card-dia:hover {
+		transform: scale(1.06);
+	}
+
+	.card-dia.lido {
+		background-color: var(--lp-accent-soft);
+		border-color: var(--lp-accent-border);
+		color: var(--lp-accent);
+	}
+	.card-dia.lido::after {
+		content: "✓";
+		position: absolute;
+		top: 2px;
+		right: 5px;
+		font-size: 0.55rem;
+		color: var(--lp-accent);
+	}
+	.card-dia.nao-lido {
+		background-color: var(--lp-surface);
+		border-color: var(--lp-border-card);
+		color: var(--lp-day-empty-text);
+	}
+	.card-dia.nao-lido:hover {
+		border-color: var(--lp-accent-border);
+		color: var(--lp-text-muted);
+	}
+	.card-dia.bloqueado {
+		background-color: var(--lp-day-empty);
+		border-color: var(--lp-day-empty-bd);
+		color: var(--lp-day-empty-text);
+		cursor: not-allowed;
+		opacity: 0.5;
+	}
+	.card-dia.bloqueado:hover {
+		transform: none;
+		border-color: var(--lp-day-empty-bd);
+		color: var(--lp-day-empty-text);
+	}
+	.card-dia.bloqueado .lock-icon {
+		position: absolute;
+		top: 3px;
+		right: 4px;
+		opacity: 0.5;
+	}
+	.card-dia.atual {
+		background-color: var(--lp-accent);
+		border-color: var(--lp-accent);
+		color: #fff;
+		box-shadow: 0 0 0 2px var(--lp-accent-soft);
+	}
+	.card-dia-badge {
+		position: absolute;
+		top: 10px;
+		right: 10px;
+		min-width: 1.4rem;
+		height: 1.4rem;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		font-size: 0.8rem;
+		border-radius: 50%;
+		background-color: var(--lp-highlight-bg);
+		color: var(--lp-text);
+	}
 </style>
 
 <script define:vars={{ dadosLivros }}>
-  const livros = JSON.parse(dadosLivros);
-  const STORAGE_KEY   = 'leitura-progresso';
-  const TEMA_KEY      = 'leitura-tema';
-  const POS_KEY       = 'leitura-posicao';
-  const root          = document.getElementById('leitura-root');
+	const livros = JSON.parse(dadosLivros);
+	const STORAGE_KEY = "leitura-progresso";
+	const TEMA_KEY = "leitura-tema";
+	const POS_KEY = "leitura-posicao";
+	const MARCADOR_KEY = "leitura-marcadores";
+	const MODO_KEY = "leitura-modo-ferramenta";
+	const root = document.getElementById("leitura-root");
 
-  /* ─── Tema ────────────────────────────────────────────── */
-  function getTema() {
-    return localStorage.getItem(TEMA_KEY) || 'dark';
-  }
+	/* ─── Tema ────────────────────────────────────────────── */
+	function getTema() {
+		return localStorage.getItem(TEMA_KEY) || "dark";
+	}
 
-  function aplicarTema(tema) {
-    root.classList.toggle('light', tema === 'light');
-    localStorage.setItem(TEMA_KEY, tema);
-    document.getElementById('icon-sol').classList.toggle('hidden', tema === 'dark');
-    document.getElementById('icon-lua').classList.toggle('hidden', tema === 'light');
-  }
+	function aplicarTema(tema) {
+		root.classList.toggle("light", tema === "light");
+		localStorage.setItem(TEMA_KEY, tema);
+		document
+			.getElementById("icon-sol")
+			.classList.toggle("hidden", tema === "dark");
+		document
+			.getElementById("icon-lua")
+			.classList.toggle("hidden", tema === "light");
+	}
 
-  document.getElementById('btn-tema').addEventListener('click', () => {
-    aplicarTema(getTema() === 'dark' ? 'light' : 'dark');
-  });
+	document.getElementById("btn-tema").addEventListener("click", () => {
+		aplicarTema(getTema() === "dark" ? "light" : "dark");
+	});
 
-  aplicarTema(getTema());
+	aplicarTema(getTema());
 
-  /* ─── Progresso ───────────────────────────────────────── */
-  function getProgresso() {
-    try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}'); }
-    catch { return {}; }
-  }
-  function salvarProgresso(p) { localStorage.setItem(STORAGE_KEY, JSON.stringify(p)); }
-  function isDiaLido(livroId, dia) {
-    const p = getProgresso();
-    return !!(p[livroId] && p[livroId].includes(dia));
-  }
-  function toggleDiaLido(livroId, dia) {
-    const p = getProgresso();
-    if (!p[livroId]) p[livroId] = [];
-    const idx = p[livroId].indexOf(dia);
-    if (idx >= 0) p[livroId].splice(idx, 1); else p[livroId].push(dia);
-    salvarProgresso(p);
-  }
-  function getDiasLidos(livroId) { return getProgresso()[livroId] || []; }
+	/* ─── Progresso ───────────────────────────────────────── */
+	function getProgresso() {
+		try {
+			return JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}");
+		} catch {
+			return {};
+		}
+	}
+	function salvarProgresso(p) {
+		localStorage.setItem(STORAGE_KEY, JSON.stringify(p));
+	}
+	function isDiaLido(livroId, dia) {
+		const p = getProgresso();
+		return !!(p[livroId] && p[livroId].includes(dia));
+	}
+	function toggleDiaLido(livroId, dia) {
+		const p = getProgresso();
+		if (!p[livroId]) p[livroId] = [];
+		const idx = p[livroId].indexOf(dia);
+		if (idx >= 0) p[livroId].splice(idx, 1);
+		else p[livroId].push(dia);
+		salvarProgresso(p);
+	}
+	function getDiasLidos(livroId) {
+		return getProgresso()[livroId] || [];
+	}
 
-  /* ─── Posição de leitura ──────────────────────────────────── */
-  function getPosicaoLeitura(livroId, diaNum) {
-    try {
-      const pos = JSON.parse(localStorage.getItem(POS_KEY) || '{}');
-      const val = pos[livroId]?.[diaNum];
-      if (!val && val !== 0) return null;
-      // compatibilidade com formato antigo (número = índice de parágrafo)
-      if (typeof val === 'number') return { p: val, w: Infinity };
-      return val;
-    } catch { return null; }
-  }
-  function salvarPosicaoLeitura(livroId, diaNum, pos) {
-    try {
-      const data = JSON.parse(localStorage.getItem(POS_KEY) || '{}');
-      if (!data[livroId]) data[livroId] = {};
-      if (pos === null) delete data[livroId][diaNum];
-      else data[livroId][diaNum] = pos;
-      localStorage.setItem(POS_KEY, JSON.stringify(data));
-    } catch {}
-  }
-  function aplicarUnderline(pos) {
-    document.querySelectorAll('#dia-conteudo .lp-word').forEach(span => {
-      if (!pos) { span.classList.remove('lp-word-lido'); return; }
-      const sp = parseInt(span.dataset.para, 10);
-      const sw = parseInt(span.dataset.word, 10);
-      span.classList.toggle('lp-word-lido', sp < pos.p || (sp === pos.p && sw <= pos.w));
-    });
-  }
-  function inicializarUnderline() {
-    if (!livroAtual || !diaAtual) return;
-    document.querySelectorAll('#dia-conteudo .lp-word').forEach(span => {
-      span.addEventListener('click', e => {
-        e.stopPropagation();
-        const sp = parseInt(span.dataset.para, 10);
-        const sw = parseInt(span.dataset.word, 10);
-        const cur = getPosicaoLeitura(livroAtual.id, diaAtual.dia);
-        const isBoundary = cur && cur.p === sp && cur.w === sw;
-        const newPos = isBoundary ? null : { p: sp, w: sw };
-        aplicarUnderline(newPos);
-        salvarPosicaoLeitura(livroAtual.id, diaAtual.dia, newPos);
-      });
-    });
-    const saved = getPosicaoLeitura(livroAtual.id, diaAtual.dia);
-    if (saved) aplicarUnderline(saved);
-  }
+	/* ─── Posição de leitura ──────────────────────────────────── */
+	function getPosicaoLeitura(livroId, diaNum) {
+		try {
+			const pos = JSON.parse(localStorage.getItem(POS_KEY) || "{}");
+			const val = pos[livroId]?.[diaNum];
+			if (!val && val !== 0) return null;
+			// compatibilidade com formato antigo (número = índice de parágrafo)
+			if (typeof val === "number") return { p: val, w: Infinity };
+			return val;
+		} catch {
+			return null;
+		}
+	}
+	function salvarPosicaoLeitura(livroId, diaNum, pos) {
+		try {
+			const data = JSON.parse(localStorage.getItem(POS_KEY) || "{}");
+			if (!data[livroId]) data[livroId] = {};
+			if (pos === null) delete data[livroId][diaNum];
+			else data[livroId][diaNum] = pos;
+			localStorage.setItem(POS_KEY, JSON.stringify(data));
+		} catch {}
+	}
+	function aplicarUnderline(pos) {
+		document.querySelectorAll("#dia-conteudo .lp-word").forEach((span) => {
+			if (!pos) {
+				span.classList.remove("lp-word-lido");
+				return;
+			}
+			const sp = parseInt(span.dataset.para, 10);
+			const sw = parseInt(span.dataset.word, 10);
+			span.classList.toggle(
+				"lp-word-lido",
+				sp < pos.p || (sp === pos.p && sw <= pos.w),
+			);
+		});
+	}
+	/* ─── Marcador de texto (destaques) ───────────────────────── */
+	let selecaoInicio = null;
 
-  /* ─── State ───────────────────────────────────────────── */
-  let livroAtual = null;
-  let diaAtual   = null;
+	function posMenorOuIgual(a, b) {
+		return a.p < b.p || (a.p === b.p && a.w <= b.w);
+	}
+	function posEntreIntervalo(pos, range) {
+		const ordenado = posMenorOuIgual(range.inicio, range.fim);
+		const inicio = ordenado ? range.inicio : range.fim;
+		const fim = ordenado ? range.fim : range.inicio;
+		return posMenorOuIgual(inicio, pos) && posMenorOuIgual(pos, fim);
+	}
+	function getMarcadores(livroId, diaNum) {
+		try {
+			const data = JSON.parse(localStorage.getItem(MARCADOR_KEY) || "{}");
+			return data[livroId]?.[diaNum] || [];
+		} catch {
+			return [];
+		}
+	}
+	function getQuantidadeMarcadores(livroId, diaNum) {
+		return getMarcadores(livroId, diaNum).length;
+	}
+	function salvarMarcadores(livroId, diaNum, lista) {
+		try {
+			const data = JSON.parse(localStorage.getItem(MARCADOR_KEY) || "{}");
+			if (!data[livroId]) data[livroId] = {};
+			if (lista.length === 0) delete data[livroId][diaNum];
+			else data[livroId][diaNum] = lista;
+			localStorage.setItem(MARCADOR_KEY, JSON.stringify(data));
+		} catch {}
+	}
+	function aplicarMarcadores() {
+		if (!livroAtual || !diaAtual) return;
+		const marcadores = getMarcadores(livroAtual.id, diaAtual.dia);
+		document.querySelectorAll("#dia-conteudo .lp-word").forEach((span) => {
+			const pos = {
+				p: parseInt(span.dataset.para, 10),
+				w: parseInt(span.dataset.word, 10),
+			};
+			const destacado = marcadores.some((range) =>
+				posEntreIntervalo(pos, range),
+			);
+			span.classList.toggle("lp-word-marcado", destacado);
+			const selecionando =
+				!!selecaoInicio &&
+				selecaoInicio.p === pos.p &&
+				selecaoInicio.w === pos.w;
+			span.classList.toggle("lp-word-selecionando", selecionando);
+		});
+	}
+	function handleCliqueMarcador(pos) {
+		const marcadores = getMarcadores(livroAtual.id, diaAtual.dia);
 
-  const viewLivros   = document.getElementById('view-livros');
-  const viewDias     = document.getElementById('view-dias');
-  const viewConteudo = document.getElementById('view-conteudo');
+		if (selecaoInicio) {
+			if (selecaoInicio.p === pos.p && selecaoInicio.w === pos.w) {
+				selecaoInicio = null;
+				aplicarMarcadores();
+				return;
+			}
+			marcadores.push({ inicio: selecaoInicio, fim: pos });
+			salvarMarcadores(livroAtual.id, diaAtual.dia, marcadores);
+			selecaoInicio = null;
+			aplicarMarcadores();
+			return;
+		}
 
-  /* ─── URL params ─────────────────────────────────────── */
-  function atualizarURL(livroId, dia) {
-    const params = new URLSearchParams();
-    if (livroId) params.set('livro', livroId);
-    if (dia)     params.set('dia', dia);
-    const query = params.toString();
-    history.replaceState(null, '', query ? `?${query}` : window.location.pathname);
-  }
+		const idx = marcadores.findIndex((range) => posEntreIntervalo(pos, range));
+		if (idx >= 0) {
+			marcadores.splice(idx, 1);
+			salvarMarcadores(livroAtual.id, diaAtual.dia, marcadores);
+			aplicarMarcadores();
+			return;
+		}
 
-  function limparURL() {
-    history.replaceState(null, '', window.location.pathname);
-  }
+		selecaoInicio = pos;
+		aplicarMarcadores();
+	}
 
-  function mostrarView(view) {
-    [viewLivros, viewDias, viewConteudo].forEach(v => v.classList.add('hidden'));
-    view.classList.remove('hidden');
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-    if (view === viewLivros)                              limparURL();
-    else if (view === viewDias && livroAtual)             atualizarURL(livroAtual.id, null);
-    else if (view === viewConteudo && livroAtual && diaAtual) atualizarURL(livroAtual.id, diaAtual.dia);
-  }
+	/* ─── Ferramenta ativa (lido / marcador) ──────────────────── */
+	let modoFerramenta = localStorage.getItem(MODO_KEY) || "lido";
+	let hintTimeoutId = null;
+	const HINT_DURACAO_MS = 10000;
 
-  /* ─── VIEW: Livros ────────────────────────────────────── */
-  function renderLivros() {
-    const lista = document.getElementById('lista-livros');
-    lista.innerHTML = '';
-    livros.forEach(livro => {
-      const lidos = getDiasLidos(livro.id).length;
-      const pct   = Math.round((lidos / livro.totalDias) * 100);
-      const card  = document.createElement('button');
-      card.className = 'lp-card';
-      card.innerHTML = `
+	function aplicarModoFerramenta(modo) {
+		modoFerramenta = modo;
+		localStorage.setItem(MODO_KEY, modo);
+		selecaoInicio = null;
+		document
+			.getElementById("btn-modo-lido")
+			.classList.toggle("active", modo === "lido");
+		document
+			.getElementById("btn-modo-marcador")
+			.classList.toggle("active", modo === "marcador");
+
+		const hint = document.getElementById("lp-marcador-hint");
+		clearTimeout(hintTimeoutId);
+		if (modo === "marcador") {
+			hint.classList.remove("hidden");
+			hintTimeoutId = setTimeout(
+				() => hint.classList.add("hidden"),
+				HINT_DURACAO_MS,
+			);
+		} else {
+			hint.classList.add("hidden");
+		}
+
+		aplicarMarcadores();
+	}
+
+	document
+		.getElementById("btn-modo-lido")
+		.addEventListener("click", () => aplicarModoFerramenta("lido"));
+	document
+		.getElementById("btn-modo-marcador")
+		.addEventListener("click", () => aplicarModoFerramenta("marcador"));
+
+	function inicializarPalavras() {
+		if (!livroAtual || !diaAtual) return;
+		selecaoInicio = null;
+		document.querySelectorAll("#dia-conteudo .lp-word").forEach((span) => {
+			span.addEventListener("click", (e) => {
+				e.stopPropagation();
+				const sp = parseInt(span.dataset.para, 10);
+				const sw = parseInt(span.dataset.word, 10);
+				const pos = { p: sp, w: sw };
+
+				if (modoFerramenta === "marcador") {
+					handleCliqueMarcador(pos);
+					return;
+				}
+
+				const cur = getPosicaoLeitura(livroAtual.id, diaAtual.dia);
+				const isBoundary = cur && cur.p === sp && cur.w === sw;
+				const newPos = isBoundary ? null : pos;
+				aplicarUnderline(newPos);
+				salvarPosicaoLeitura(livroAtual.id, diaAtual.dia, newPos);
+			});
+		});
+		const saved = getPosicaoLeitura(livroAtual.id, diaAtual.dia);
+		if (saved) aplicarUnderline(saved);
+		aplicarMarcadores();
+	}
+
+	/* ─── State ───────────────────────────────────────────── */
+	let livroAtual = null;
+	let diaAtual = null;
+
+	const viewLivros = document.getElementById("view-livros");
+	const viewDias = document.getElementById("view-dias");
+	const viewConteudo = document.getElementById("view-conteudo");
+
+	/* ─── URL params ─────────────────────────────────────── */
+	function atualizarURL(livroId, dia) {
+		const params = new URLSearchParams();
+		if (livroId) params.set("livro", livroId);
+		if (dia) params.set("dia", dia);
+		const query = params.toString();
+		history.replaceState(
+			null,
+			"",
+			query ? `?${query}` : window.location.pathname,
+		);
+	}
+
+	function limparURL() {
+		history.replaceState(null, "", window.location.pathname);
+	}
+
+	function mostrarView(view) {
+		[viewLivros, viewDias, viewConteudo].forEach((v) =>
+			v.classList.add("hidden"),
+		);
+		view.classList.remove("hidden");
+		window.scrollTo({ top: 0, behavior: "smooth" });
+		if (view === viewLivros) limparURL();
+		else if (view === viewDias && livroAtual) atualizarURL(livroAtual.id, null);
+		else if (view === viewConteudo && livroAtual && diaAtual)
+			atualizarURL(livroAtual.id, diaAtual.dia);
+	}
+
+	/* ─── VIEW: Livros ────────────────────────────────────── */
+	function renderLivros() {
+		const lista = document.getElementById("lista-livros");
+		lista.innerHTML = "";
+		livros.forEach((livro) => {
+			const lidos = getDiasLidos(livro.id).length;
+			const pct = Math.round((lidos / livro.totalDias) * 100);
+			const card = document.createElement("button");
+			card.className = "lp-card";
+			card.innerHTML = `
         <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:0.75rem">
           <div class="lp-card-icon">
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 256 256" fill="currentColor">
@@ -488,111 +960,144 @@ const dadosLivros = JSON.stringify(livros);
           <div style="width:${pct}%;height:100%;background-color:var(--lp-accent);border-radius:9999px;transition:width 0.5s"></div>
         </div>
       `;
-      card.addEventListener('click', () => { livroAtual = livro; renderDias(); mostrarView(viewDias); });
-      lista.appendChild(card);
-    });
-    mostrarView(viewLivros);
-  }
+			card.addEventListener("click", () => {
+				livroAtual = livro;
+				renderDias();
+				mostrarView(viewDias);
+			});
+			lista.appendChild(card);
+		});
+		mostrarView(viewLivros);
+	}
 
-  /* ─── VIEW: Dias ──────────────────────────────────────── */
-  function renderDias() {
-    if (!livroAtual) return;
-    document.getElementById('livro-titulo').textContent = livroAtual.titulo;
-    document.getElementById('livro-autor').textContent  = livroAtual.autor;
+	/* ─── VIEW: Dias ──────────────────────────────────────── */
+	function renderDias() {
+		if (!livroAtual) return;
+		document.getElementById("livro-titulo").textContent = livroAtual.titulo;
+		document.getElementById("livro-autor").textContent = livroAtual.autor;
 
-    const lidos = getDiasLidos(livroAtual.id);
-    const pct   = Math.round((lidos.length / livroAtual.totalDias) * 100);
-    document.getElementById('progresso-texto').textContent   = `${lidos.length} de ${livroAtual.totalDias} dias lidos`;
-    document.getElementById('progresso-barra').style.width   = `${pct}%`;
+		const lidos = getDiasLidos(livroAtual.id);
+		const pct = Math.round((lidos.length / livroAtual.totalDias) * 100);
+		document.getElementById("progresso-texto").textContent =
+			`${lidos.length} de ${livroAtual.totalDias} dias lidos`;
+		document.getElementById("progresso-barra").style.width = `${pct}%`;
 
-    const grade = document.getElementById('grade-dias');
-    grade.innerHTML = '';
-    livroAtual.dias.forEach(dia => {
-      const bloqueado = dia.disponivel === false;
-      const lido      = !bloqueado && lidos.includes(dia.dia);
-      const isAtual   = !bloqueado && dia.dia === diaAtual?.dia;
-      const card      = document.createElement('button');
+		const grade = document.getElementById("grade-dias");
+		grade.innerHTML = "";
+		livroAtual.dias.forEach((dia) => {
+			const bloqueado = dia.disponivel === false;
+			const lido = !bloqueado && lidos.includes(dia.dia);
+			const isAtual = !bloqueado && dia.dia === diaAtual?.dia;
+			const card = document.createElement("button");
 
-      let classe = 'card-dia ';
-      if (bloqueado)   classe += 'bloqueado';
-      else if (lido)   classe += 'lido';
-      else if (isAtual) classe += 'atual';
-      else              classe += 'nao-lido';
+			let classe = "card-dia ";
+			if (bloqueado) classe += "bloqueado";
+			else if (lido) classe += "lido";
+			else if (isAtual) classe += "atual";
+			else classe += "nao-lido";
 
-      card.className = classe;
-      card.title     = bloqueado ? `Dia ${dia.dia} — ainda não disponível` : dia.titulo;
-      card.disabled  = bloqueado;
-      card.innerHTML = bloqueado
-        ? `<span>${dia.dia}</span><svg class="lock-icon" xmlns="http://www.w3.org/2000/svg" width="8" height="8" viewBox="0 0 256 256" fill="currentColor"><path d="M208,96H176V72a48,48,0,0,0-96,0V96H48A16,16,0,0,0,32,112V208a16,16,0,0,0,16,16H208a16,16,0,0,0,16-16V112A16,16,0,0,0,208,96ZM96,72a32,32,0,0,1,64,0V96H96ZM208,208H48V112H208V208Z"/></svg>`
-        : `<span>${dia.dia}</span>`;
+			card.className = classe;
+			card.title = bloqueado
+				? `Dia ${dia.dia} — ainda não disponível`
+				: dia.titulo;
+			card.disabled = bloqueado;
+			if (bloqueado) {
+				card.innerHTML = `<span>${dia.dia}</span><svg class="lock-icon" xmlns="http://www.w3.org/2000/svg" width="8" height="8" viewBox="0 0 256 256" fill="currentColor"><path d="M208,96H176V72a48,48,0,0,0-96,0V96H48A16,16,0,0,0,32,112V208a16,16,0,0,0,16,16H208a16,16,0,0,0,16-16V112A16,16,0,0,0,208,96ZM96,72a32,32,0,0,1,64,0V96H96ZM208,208H48V112H208V208Z"/></svg>`;
+			} else {
+				const qtdMarcadores = getQuantidadeMarcadores(livroAtual.id, dia.dia);
+				const badge =
+					qtdMarcadores > 0
+						? `<span class="card-dia-badge" title="${qtdMarcadores} trecho(s) marcado(s)">${qtdMarcadores}</span>`
+						: "";
+				card.innerHTML = `<span>${dia.dia}</span>${badge}`;
+			}
 
-      if (!bloqueado) {
-        card.addEventListener('click', () => { diaAtual = dia; renderConteudo(); mostrarView(viewConteudo); });
-      }
-      grade.appendChild(card);
-    });
-  }
+			if (!bloqueado) {
+				card.addEventListener("click", () => {
+					diaAtual = dia;
+					renderConteudo();
+					mostrarView(viewConteudo);
+				});
+			}
+			grade.appendChild(card);
+		});
+	}
 
-  /* ─── VIEW: Conteúdo ──────────────────────────────────── */
-  function renderConteudo() {
-    if (!diaAtual || !livroAtual) return;
-    const dia = diaAtual;
+	/* ─── VIEW: Conteúdo ──────────────────────────────────── */
+	function renderConteudo() {
+		if (!diaAtual || !livroAtual) return;
+		const dia = diaAtual;
 
-    document.getElementById('dia-numero').textContent = `Dia ${dia.dia} de ${livroAtual.totalDias}`;
-    document.getElementById('dia-titulo').textContent = dia.titulo;
+		document.getElementById("dia-numero").textContent =
+			`Dia ${dia.dia} de ${livroAtual.totalDias}`;
+		document.getElementById("dia-titulo").textContent = dia.titulo;
 
-    const vBloco = document.getElementById('dia-versiculo-bloco');
-    if (dia.versiculo) {
-      document.getElementById('dia-versiculo').textContent    = dia.versiculo;
-      document.getElementById('dia-versiculo-ref').textContent = dia.versiculoRef;
-      vBloco.classList.remove('hidden');
-    } else {
-      vBloco.classList.add('hidden');
-    }
+		const vBloco = document.getElementById("dia-versiculo-bloco");
+		if (dia.versiculo) {
+			document.getElementById("dia-versiculo").textContent = dia.versiculo;
+			document.getElementById("dia-versiculo-ref").textContent =
+				dia.versiculoRef;
+			vBloco.classList.remove("hidden");
+		} else {
+			vBloco.classList.add("hidden");
+		}
 
-    document.getElementById('dia-conteudo').innerHTML = dia.conteudo.map((texto, pi) => {
-      const palavras = texto.split(' ').map((w, wi) =>
-        `<span class="lp-word" data-para="${pi}" data-word="${wi}">${w}</span>`
-      ).join(' ');
-      return `<p data-para-idx="${pi}">${palavras}</p>`;
-    }).join('');
+		document.getElementById("dia-conteudo").innerHTML = dia.conteudo
+			.map((texto, pi) => {
+				const lista = texto.split(" ");
+				const palavras = lista
+					.map((w, wi) => {
+						const sep = wi < lista.length - 1 ? " " : "";
+						return `<span class="lp-word" data-para="${pi}" data-word="${wi}">${w}${sep}</span>`;
+					})
+					.join("");
+				return `<p data-para-idx="${pi}">${palavras}</p>`;
+			})
+			.join("");
 
-    const pBloco = document.getElementById('dia-pensamento-bloco');
-    if (dia.pensamento) {
-      document.getElementById('dia-pensamento').textContent = dia.pensamento;
-      pBloco.classList.remove('hidden');
-    } else {
-      pBloco.classList.add('hidden');
-    }
+		const pBloco = document.getElementById("dia-pensamento-bloco");
+		if (dia.pensamento) {
+			document.getElementById("dia-pensamento").textContent = dia.pensamento;
+			pBloco.classList.remove("hidden");
+		} else {
+			pBloco.classList.add("hidden");
+		}
 
-    const mBloco = document.getElementById('dia-mem-bloco');
-    if (dia.versiculoMemorizacao) {
-      document.getElementById('dia-mem-versiculo').textContent = dia.versiculoMemorizacao;
-      document.getElementById('dia-mem-ref').textContent        = dia.versiculoMemorizacaoRef;
-      mBloco.classList.remove('hidden');
-    } else {
-      mBloco.classList.add('hidden');
-    }
+		const mBloco = document.getElementById("dia-mem-bloco");
+		if (dia.versiculoMemorizacao) {
+			document.getElementById("dia-mem-versiculo").textContent =
+				dia.versiculoMemorizacao;
+			document.getElementById("dia-mem-ref").textContent =
+				dia.versiculoMemorizacaoRef;
+			mBloco.classList.remove("hidden");
+		} else {
+			mBloco.classList.add("hidden");
+		}
 
-    const qBloco = document.getElementById('dia-pergunta-bloco');
-    if (dia.perguntaParaMeditar) {
-      document.getElementById('dia-pergunta').textContent = dia.perguntaParaMeditar;
-      qBloco.classList.remove('hidden');
-    } else {
-      qBloco.classList.add('hidden');
-    }
+		const qBloco = document.getElementById("dia-pergunta-bloco");
+		if (dia.perguntaParaMeditar) {
+			document.getElementById("dia-pergunta").textContent =
+				dia.perguntaParaMeditar;
+			qBloco.classList.remove("hidden");
+		} else {
+			qBloco.classList.add("hidden");
+		}
 
-    atualizarBtnMarcar(document.getElementById('btn-marcar-lido'), isDiaLido(livroAtual.id, dia.dia));
-    document.getElementById('btn-dia-anterior').disabled = dia.dia <= 1;
-    document.getElementById('btn-proximo-dia').disabled  = dia.dia >= livroAtual.totalDias;
+		atualizarBtnMarcar(
+			document.getElementById("btn-marcar-lido"),
+			isDiaLido(livroAtual.id, dia.dia),
+		);
+		document.getElementById("btn-dia-anterior").disabled = dia.dia <= 1;
+		document.getElementById("btn-proximo-dia").disabled =
+			dia.dia >= livroAtual.totalDias;
 
-    inicializarUnderline();
-  }
+		inicializarPalavras();
+	}
 
-  function atualizarBtnMarcar(btn, lido) {
-    if (lido) {
-      btn.textContent = '✓ Lido';
-      btn.style.cssText = `
+	function atualizarBtnMarcar(btn, lido) {
+		if (lido) {
+			btn.textContent = "✓ Lido";
+			btn.style.cssText = `
         background-color: var(--lp-accent-soft);
         border: 1px solid var(--lp-accent-border);
         color: var(--lp-accent);
@@ -603,9 +1108,9 @@ const dadosLivros = JSON.stringify(livros);
         transition: all 0.2s;
         cursor: pointer;
       `;
-    } else {
-      btn.textContent = 'Marcar como lido';
-      btn.style.cssText = `
+		} else {
+			btn.textContent = "Marcar como lido";
+			btn.style.cssText = `
         background-color: var(--lp-accent);
         color: #fff;
         border: none;
@@ -617,60 +1122,75 @@ const dadosLivros = JSON.stringify(livros);
         cursor: pointer;
         opacity: 1;
       `;
-    }
-  }
+		}
+	}
 
-  /* ─── Eventos ─────────────────────────────────────────── */
-  document.getElementById('btn-voltar-livros').addEventListener('click', () => { diaAtual = null; renderLivros(); });
-  document.getElementById('btn-voltar-dias').addEventListener('click', () => { renderDias(); mostrarView(viewDias); });
+	/* ─── Eventos ─────────────────────────────────────────── */
+	document.getElementById("btn-voltar-livros").addEventListener("click", () => {
+		diaAtual = null;
+		renderLivros();
+	});
+	document.getElementById("btn-voltar-dias").addEventListener("click", () => {
+		renderDias();
+		mostrarView(viewDias);
+	});
 
-  document.getElementById('btn-marcar-lido').addEventListener('click', () => {
-    if (!livroAtual || !diaAtual) return;
-    toggleDiaLido(livroAtual.id, diaAtual.dia);
-    atualizarBtnMarcar(document.getElementById('btn-marcar-lido'), isDiaLido(livroAtual.id, diaAtual.dia));
-  });
+	document.getElementById("btn-marcar-lido").addEventListener("click", () => {
+		if (!livroAtual || !diaAtual) return;
+		toggleDiaLido(livroAtual.id, diaAtual.dia);
+		atualizarBtnMarcar(
+			document.getElementById("btn-marcar-lido"),
+			isDiaLido(livroAtual.id, diaAtual.dia),
+		);
+	});
 
-  document.getElementById('btn-dia-anterior').addEventListener('click', () => {
-    if (!diaAtual || diaAtual.dia <= 1) return;
-    diaAtual = livroAtual.dias[diaAtual.dia - 2];
-    renderConteudo();
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  });
+	document.getElementById("btn-dia-anterior").addEventListener("click", () => {
+		if (!diaAtual || diaAtual.dia <= 1) return;
+		diaAtual = livroAtual.dias[diaAtual.dia - 2];
+		renderConteudo();
+		window.scrollTo({ top: 0, behavior: "smooth" });
+	});
 
-  document.getElementById('btn-proximo-dia').addEventListener('click', () => {
-    if (!diaAtual || diaAtual.dia >= livroAtual.totalDias) return;
-    diaAtual = livroAtual.dias[diaAtual.dia];
-    renderConteudo();
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  });
+	document.getElementById("btn-proximo-dia").addEventListener("click", () => {
+		if (!diaAtual || diaAtual.dia >= livroAtual.totalDias) return;
+		diaAtual = livroAtual.dias[diaAtual.dia];
+		renderConteudo();
+		window.scrollTo({ top: 0, behavior: "smooth" });
+	});
 
-  /* ─── Compartilhar ───────────────────────────────────── */
-  document.getElementById('btn-compartilhar').addEventListener('click', () => {
-    navigator.clipboard.writeText(window.location.href).then(() => {
-      const label = document.getElementById('btn-compartilhar-label');
-      label.textContent = 'Link copiado!';
-      setTimeout(() => { label.textContent = 'Copiar link do dia'; }, 2000);
-    });
-  });
+	/* ─── Compartilhar ───────────────────────────────────── */
+	document.getElementById("btn-compartilhar").addEventListener("click", () => {
+		navigator.clipboard.writeText(window.location.href).then(() => {
+			const label = document.getElementById("btn-compartilhar-label");
+			label.textContent = "Link copiado!";
+			setTimeout(() => {
+				label.textContent = "Copiar link do dia";
+			}, 2000);
+		});
+	});
 
-  /* ─── Init ────────────────────────────────────────────── */
-  const params    = new URLSearchParams(window.location.search);
-  const livroParam = params.get('livro');
-  const diaParam   = params.get('dia');
+	/* ─── Init ────────────────────────────────────────────── */
+	aplicarModoFerramenta(modoFerramenta);
 
-  if (livroParam) livroAtual = livros.find(l => l.id === livroParam) || null;
-  if (livroAtual && diaParam) {
-    const diaNum = parseInt(diaParam, 10);
-    diaAtual = livroAtual.dias.find(d => d.dia === diaNum && d.disponivel !== false) || null;
-  }
+	const params = new URLSearchParams(window.location.search);
+	const livroParam = params.get("livro");
+	const diaParam = params.get("dia");
 
-  if (diaAtual) {
-    renderConteudo();
-    mostrarView(viewConteudo);
-  } else if (livroAtual) {
-    renderDias();
-    mostrarView(viewDias);
-  } else {
-    renderLivros();
-  }
+	if (livroParam) livroAtual = livros.find((l) => l.id === livroParam) || null;
+	if (livroAtual && diaParam) {
+		const diaNum = parseInt(diaParam, 10);
+		diaAtual =
+			livroAtual.dias.find((d) => d.dia === diaNum && d.disponivel !== false) ||
+			null;
+	}
+
+	if (diaAtual) {
+		renderConteudo();
+		mostrarView(viewConteudo);
+	} else if (livroAtual) {
+		renderDias();
+		mostrarView(viewDias);
+	} else {
+		renderLivros();
+	}
 </script>
